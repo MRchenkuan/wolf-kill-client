@@ -1,4 +1,4 @@
-<view class='contianer'>
+<view wx:if="{{stage<1 || isHost}}" class='contianer'>
     <text class='title'>玩家</text>
     <view class='players'>
         <seat judge player="{{judge}}" alive="{{true}}"/>
@@ -40,7 +40,6 @@
 <block wx:else>
     <card wx:if="{{stage>=1}}" type="{{me.role.type}}" police/>
 </block>
-<card type="Villager" police/>
 
 <!-- 投票 -->
 <!-- <vote /> -->
