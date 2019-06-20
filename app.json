@@ -1,0 +1,15 @@
+{
+    "pages": [
+        "pages/create/index",
+        "pages/ready/index",
+        "pages/authorize/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "狼人杀",
+        "navigationBarTextStyle": "white",
+        "navigationStyle": "custom"
+    },
+    "sitemapLocation": "sitemap.json"
+}

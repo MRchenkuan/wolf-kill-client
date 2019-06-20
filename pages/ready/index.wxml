@@ -1,0 +1,45 @@
+<view class='contianer'>
+    <text class='title'>玩家</text>
+    <view class='players'>
+        <seat judge player="{{judge}}" alive="{{true}}"/>
+        <seat
+            wx:for="{{seats}}" 
+            wx:for-item="index" 
+            wx:key="{{index}}"
+            player="{{players[index]}}"
+            alive="{{players[index].alive}}"
+            ></seat>
+    </view>
+    <text class='title'>角色</text>
+     <view class='roles'>
+        <role
+            readOnly="{{!isHost || stage>0}}"
+            wx:for="{{roleMap}}" 
+            wx:for-item="role"
+            bind:increase="increaseRole"
+            bind:decrease="decreaseRole"
+            key="{{role.key}}"
+            name="{{role.name}}"
+            count="{{role.count}}"
+            wx:key="{{role.name}}"
+        />
+    </view>
+</view>
+
+<!-- 法官视角 -->
+<block wx:if="{{isHost}}">
+    <view wx:if="{{stage === 0}}" class='btn btn-success' bindtap="startGame" data-type="start">开始游戏</view>
+    <block wx:if="{{stage === 1}}">
+        <view class='btn btn-success' bindtap="syncRemote" data-type="vote">发起投票</view>
+        <view class='btn btn-danger' bindtap="startGame" data-type="dealing">重新发牌</view>
+        <view class='btn btn-danger' bindtap="syncRemote" data-type="result">公布身份</view>
+    </block>
+</block>
+
+<!-- 非法官视角 -->
+<block wx:else>
+    <card wx:if="{{stage>=1}}" type="{{me.role.type}}" police/>
+</block>
+
+<!-- 投票 -->
+<!-- <vote /> -->

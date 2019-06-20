@@ -1,0 +1,10 @@
+<view class='frame'>
+    <view class='card {{shake? "shake": ""}}'>
+        <image src='./images/{{police?"officer":"back"}}.jpg' class='front'></image>
+        <image src='./images/{{type}}.jpg' class='back'></image>
+    </view>
+    <view class='text'>
+        <view class='title'>{{role.name}}</view>
+        <text class='desc'>{{role.desc}}</text>
+    </view>
+</view>

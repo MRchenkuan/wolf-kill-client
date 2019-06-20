@@ -1,0 +1,53 @@
+/* components/Seat/index.wxss */
+.role{
+    width: 100rpx;
+    height: 100rpx;
+    margin: 10rpx;
+    box-sizing: border-box;
+    border: 2px solid #fff;
+    border-radius: 5rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.dot{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: linear-gradient(to bottom right, #ff8069, #E70012);
+    transform: translate(20%, -50%);
+    width: 35rpx;
+    height: 35rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 24rpx;
+}
+.dot.empty{
+    display: none;
+}
+
+.decrease{
+    background: linear-gradient(to bottom right, #ff8069, #E70012);
+    font-size: 24rpx;
+    border-radius: 10rpx;
+    color: #fff;
+    text-align: center;
+    width: 80rpx;
+    padding: 5rpx;
+    margin: 1.5vw auto 5vw;
+}
+
+.avt{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.name{
+    font-size: 28rpx;
+    text-align: center;
+}

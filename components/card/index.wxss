@@ -1,0 +1,103 @@
+/* components/card/index.wxss */
+.frame{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.card{
+    width: 40.8vh;
+    height: 60vh;
+    position: relative;
+    border-radius: 10rpx;
+    margin: 10vh auto 10rpx;
+    transform-style: preserve-3d;
+    transition: transform ease-in-out 600ms;
+    transform: perspective(3000rpx) rotateY(0);
+    box-sizing: border-box;
+    z-index: 9;
+}
+
+.card.shake{
+    animation: shake 1000ms;
+}
+
+.card>.front, .card>.back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition:transform ease-in-out 600ms;
+    transform: perspective(3000rpx) rotateY(0);
+    box-shadow: 0 0 20rpx 5rpx #000;
+    border-radius: 20rpx;
+    border: 10rpx solid #eee;
+    box-sizing: border-box;
+    /* z-index: 9; */
+}
+.card>.back{
+    transform: perspective(3000rpx) rotateY(180deg);
+}
+
+.text{
+    width: 600rpx;
+    padding: 20rpx;
+    margin: auto;
+    transition: ease 100ms;
+    opacity: 0;
+}
+.text>.title{
+    font-weight: 999;
+    font-size: 40rpx;
+}
+
+.text>.desc{
+    margin: 20rpx 0;
+    font-size: 26rpx;
+}
+
+.frame:active>.text{
+    transition: 500ms ease 300ms;
+    opacity: 1;
+}
+.frame:active>.card{
+    transform: perspective(3000rpx) rotateY(-180deg);
+}
+
+@keyframes shake{
+    0%{
+        transform: perspective(3000rpx) rotateY(0);
+        transition-timing-function: ease-out;
+    }
+    25% {
+        transform: perspective(3000rpx) rotateY(-50deg);
+        transition-timing-function: ease;
+    }
+    45% {
+        transform: perspective(3000rpx) rotateY(40deg);
+        transition-timing-function: ease;
+    }
+    60% {
+        transform: perspective(3000rpx) rotateY(-30deg);
+        transition-timing-function: ease;
+    }
+    75% {
+        transform: perspective(3000rpx) rotateY(20deg);
+        transition-timing-function: ease;
+    }
+
+    90%{
+        transform: perspective(3000rpx) rotateY(-10deg);
+        transition-timing-function: ease;
+    }
+
+    100% {
+        transform: perspective(3000rpx) rotateY(0deg);
+     transition-timing-function: ease-out;
+    }
+}

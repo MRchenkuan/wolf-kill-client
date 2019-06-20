@@ -1,0 +1,14 @@
+.btn-start {
+    background: linear-gradient(to bottom right, #ff8069, #e70012);
+    padding: 20rpx;
+    width: 50%;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #fff;
+    text-align: center;
+    border-radius: 10rpx;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}

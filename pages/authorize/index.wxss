@@ -1,0 +1,10 @@
+/* pages/authorize/index.wxss */
+.frame{
+    width: 80vw;
+    margin: 30vw auto;
+}
+
+.text{
+    font-size: 28rpx;
+    margin-bottom: 20rpx;
+}

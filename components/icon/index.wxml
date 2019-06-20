@@ -1,0 +1,3 @@
+<!--components/icons/icon.wxml-->
+<span class="iconfont icon-{{type}}"
+    style='{{ (size ? ("font-size: " + size + ";") : "") + (color ? ("color:"+ color+";") : "") }}'></span>

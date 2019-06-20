@@ -1,0 +1,24 @@
+/* components/shop-hanzo-counter/shop-hanzo-counter.wxss */
+
+.hanzo-counter {
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+.hanzo-counter .options {
+    color: rgb(211,44,37);
+    text-align: center;
+}
+.hanzo-counter .options.disabled{
+    color: #999999;
+}
+.hanzo-counter .input {
+    width: 20rpx;
+    height: 22.5rpx;
+    line-height: 22.5rpx;
+    display: block;
+    outline: none;
+    text-align: center;
+    font-size: 22rpx;
+    color: #555555;
+}
