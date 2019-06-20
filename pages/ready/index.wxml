@@ -40,6 +40,7 @@
 <block wx:else>
     <card wx:if="{{stage>=1}}" type="{{me.role.type}}" police/>
 </block>
+<card type="Villager" police/>
 
 <!-- 投票 -->
 <!-- <vote /> -->
