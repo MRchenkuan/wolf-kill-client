@@ -90,7 +90,7 @@ Page({
             // 玩家列表
             players: player.filter(it=>!it.isJudge),
             // 法官
-            judge: player.find(it=>it.isJudge),
+            judge: player.find(it=>it.isJudge) || {},
             // 角色方案
             roleMap: this.transformRoleMap(roleMap),
             // 当前是否房主
