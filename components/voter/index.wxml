@@ -1,0 +1,44 @@
+<!-- 观众模式 -->
+<view wx:if="{{viewMode}}" class='frame'>
+    <scroll-view scroll-y class='card viewmode {{shake? "shake": ""}}'>
+        <view class="options viewmode left">
+            <view 
+                class="option"
+                wx:for="{{options}}" 
+                wx:for-item="option" 
+                wx:key="{{option.userId}}">
+                <player simple player="{{option}}"></player>
+            </view>
+        </view>
+        <view class="options viewmode right">
+            <view 
+                class="option"
+                wx:for="{{options}}" 
+                wx:for-item="option" 
+                wx:key="{{option.userId}}">
+                <player simple player="{{option}}"></player>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="btn btn-info confirm">确定</view>
+</view>
+
+<!-- 普通模式 -->
+<view wx:else class='frame'>
+    <scroll-view scroll-y class='card {{shake? "shake": ""}}'>
+        <view class="options">
+            <view 
+                bindtap="onCheck"
+                class="option"
+                wx:for="{{options}}" 
+                wx:for-item="option" 
+                wx:for-index="index"
+                data-checked="{{option}}"
+                wx:key="{{option.userId}}">
+                <player player="{{option}}"></player>
+                <image src="./images/round.png" class="round" wx:if="{{checked && (checked === option.userId)}}"/>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="btn btn-info confirm">确定</view>
+</view>

@@ -2,6 +2,7 @@
   "usingComponents": {
     "seat": "../../components/seat/index",
     "card": "../../components/card/index",
-    "role": "../../components/role/index"
+    "role": "../../components/role/index",
+    "voter": "../../components/voter/index"
   }
 }

@@ -1,22 +1,18 @@
-import roleMap from './card.js';
 // components/card/index.js
 Component({
     /**
      * 组件的属性列表
      */
     properties: {
-        type: {
-            type: String,
-            default: null,
-            observer(v){
-                this.setData({ role: roleMap[v] })
-            }
+        options: {
+            type: Array,
+            default: []
         },
         shake:{
             type: Boolean,
             default: true,
         },
-        police: {
+        viewMode: {
             type: Boolean,
             default: false,
         }
@@ -26,13 +22,16 @@ Component({
      * 组件的初始数据
      */
     data: {
-        role: {},
+        checked: null,
     },
 
     /**
      * 组件的方法列表
      */
     methods: {
-
+        onCheck(e){
+            const checked = e.currentTarget.dataset.checked;
+            this.setData({checked: checked.userId});
+        }
     }
 })

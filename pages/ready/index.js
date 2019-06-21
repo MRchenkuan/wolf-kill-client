@@ -22,6 +22,10 @@ Page({
         roleMap: [], // 角色方案
         stage: 0, // 游戏阶段 0:准备, 1:进行中，2:投票中， -1:已结束， 
         me: {},
+        myCardShake: true,
+        voterShake: true,
+        tickets: [], //选票
+        voted: false, // 是否已投票
     },
     ...openidBehavior.member,
     ...authorizeBehavior.member,
@@ -39,7 +43,12 @@ Page({
         this.tableId = tableId;
         // this.joinGame(tableId)
     },
-
+    shakeMyCard(){
+        this.setData({ myCardShake: false}, ()=>{
+            this.setData({ myCardShake: true})
+            wx.vibrateShort()
+        })
+    },
     /**
      * 加入游戏
      */
@@ -74,37 +83,68 @@ Page({
             })
         })
     },
+
+    /**
+     * 重置游戏
+     */
+    resetGame() {
+        getOpenId().then(userId => {
+            api.resetGame({ userId, tableId: this.tableId }).then(table => {
+                // 同步房间信息
+                this.syncLocal(userId, table);
+            })
+        })
+    },
+    /**
+     * 公布身份
+     */
+    openAllRoles(){
+        getOpenId().then(userId => {
+            api.openAllRoles({ userId, tableId: this.tableId }).then(table => {
+                // 同步房间信息
+                this.syncLocal(userId, table);
+            })
+        })
+    },
     /**
      * 同步房间信息
      */
     syncLocal(userId, table){
-        const { ownerId, player, roleMap, status, seats, roles } = table;
-        // 座位
-        this.seats = seats;
-        // 我是谁
-        const me = player.find(it => it.userId === userId) || {}
-        // 同步信息
-        this.setData({
-            // 游戏阶段
-            stage: status,
-            // 玩家列表
-            players: player.filter(it=>!it.isJudge),
-            // 法官
-            judge: player.find(it=>it.isJudge) || {},
-            // 角色方案
-            roleMap: this.transformRoleMap(roleMap),
-            // 当前是否房主
-            isHost: ownerId === userId,
-            // 我的信息
-            me,
-        });
+        return new Promise((resolve, reject)=>{
+            try{
+                const { ownerId, player, roleMap, status, seats, roles } = table;
+                // 座位
+                this.seats = seats;
+                // 我是谁
+                const me = player.find(it => it.userId === userId) || {}
+                // 同步信息
+                this.setData({
+                    // 游戏阶段
+                    stage: status,
+                    // 玩家列表
+                    players: player.filter(it => !it.isJudge),
+                    // 法官
+                    judge: player.find(it => it.isJudge) || {},
+                    // 角色方案
+                    roleMap: this.transformRoleMap(roleMap),
+                    // 当前是否房主
+                    isHost: ownerId === userId,
+                    // 我的信息
+                    me,
+                }, resolve);
+            }catch(e){
+                reject(e)
+            }
+        })
     },
     pullRemote(){
-        getOpenId().then(userId => {
-            api.getTable({ userId, tableId: this.tableId }).then(table=>{
-                // 同步房间信息
-                this.syncLocal(userId, table);
-            })
+        return new Promise((resolve, reject)=>{
+            getOpenId().then(userId => {
+                api.getTable({ userId, tableId: this.tableId }).then(table => {
+                    // 同步房间信息
+                    this.syncLocal(userId, table).then(resolve).catch(reject);
+                })
+            }).catch(reject);
         })
         
     },
@@ -121,6 +161,13 @@ Page({
                 break;
             case "sync": // 主动远程同步
                 this.pullRemote();
+                break;
+            case "start": // 游戏开始，摇晃卡片
+                this.pullRemote().then(()=>{
+                    this.shakeMyCard();
+                }).catch(e=>{
+                    console.log(e)
+                });
                 break;
         }
     },
@@ -189,47 +236,17 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面初次渲染完成
+     * 完成投票时触发
      */
-    onReady: function () {
-
+    onVoted({target: {detail}}){
+        debugger
     },
-
     /**
-     * 生命周期函数--监听页面显示
+     * 显示时触发
      */
-    onShow: function () {
-        if (this.tableId) this.joinGame(this.tableId)
+    onShow(){
+        this.joinGame(this.tableId);
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
     /**
      * 用户点击右上角分享
      */

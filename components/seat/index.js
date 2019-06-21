@@ -11,6 +11,14 @@ Component({
         judge: {
             type: Boolean,
             default: false,
+        },
+        open: {
+            type: Boolean,
+            default: false,
+        },
+        simple: {
+            type: Boolean,
+            default: false,
         }
     },
 
@@ -25,6 +33,8 @@ Component({
      * 组件的方法列表
      */
     methods: {
-
+        onTap(){
+            this.triggerEvent('tap', this.data.player)
+        }
     }
 })

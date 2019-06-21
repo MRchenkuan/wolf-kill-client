@@ -22,9 +22,30 @@
 .btn-danger{
     background: linear-gradient(to bottom right, #ff8069, #e70012);
 }
-.btn-tool{
+.btn-warn{
     background: linear-gradient(to bottom right, #FFC107, #FF9800);
 }
+
+.btn-group{
+    margin: 20rpx 10rpx;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-group .btn{
+    width: 30%;
+    height: 30rpx;
+    line-height: 30rpx;
+    margin: 0;
+    padding: 20rpx 0;
+}
+
+.btn.vote{
+    width: auto;
+    height: 50rpx;
+    line-height: 50rpx;
+    margin: 80rpx 10rpx 0;
+}
+
 page{
     /* transition: 1000ms ease 600ms; */
     background-size: auto 120%;

@@ -1,6 +1,14 @@
 <!--components/Seat/index.wxml-->
-<view class='seat{{judge?" judge": ""}}'>
-    <view wx:if="{{!player}}" class='empty'>+</view>
-    <image class='avt' src='{{player.avt}}'></image>
+<view class="frame" bindtap="{{onTap}}">
+    <view class='seat{{judge?" judge": ""}}'>
+        <view wx:if="{{!player}}" class='empty'>+</view>
+        <image class='avt' src='{{player.avt}}'></image>
+        <view wx:if="{{open && player.role}}" class="role {{player.role.type}}">{{player.role.name}}</view>
+        <block wx:if="{{player.userId && !player.alive}}">
+            <view class="die-tag">出局</view>
+            <view class="die-cover"></view>
+        </block>
+    </view>
+    <view wx:if="{{simple}}" class='simplename'>{{player.name}}</view>
+    <view wx:if="{{!simple}}" class='name'>{{player.name}}</view>
 </view>
-<view class='name'>{{player.name}}</view>

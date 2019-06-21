@@ -15,8 +15,16 @@ export default {
         url: '/start',
         method: 'post',
     },
+    'resetGame':{
+        url: '/reset',
+        method: 'post',
+    },
     'updateTable': {
         url: "/update",
+        method: 'post'
+    },
+    'openAllRoles': {
+        url: "/gameover",
         method: 'post'
     },
     'getTable':{

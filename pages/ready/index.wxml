@@ -6,6 +6,7 @@
             wx:for="{{seats}}" 
             wx:for-item="index" 
             wx:key="{{index}}"
+            open="{{isHost || stage===-1}}"
             player="{{players[index]}}"
             alive="{{players[index].alive}}"
             ></seat>
@@ -28,18 +29,33 @@
 
 <!-- 法官视角 -->
 <block wx:if="{{isHost}}">
-    <view wx:if="{{stage === 0}}" class='btn btn-success' bindtap="startGame" data-type="start">开始游戏</view>
+    <view wx:if="{{stage === -1}}" class='btn btn-warn' bindtap="resetGame">重新开始</view>
+    <view wx:if="{{stage === 0}}" class='btn btn-success' bindtap="startGame">开始游戏</view>
     <block wx:if="{{stage === 1}}">
-        <view class='btn btn-success' bindtap="syncRemote" data-type="vote">发起投票</view>
-        <view class='btn btn-danger' bindtap="startGame" data-type="dealing">重新发牌</view>
-        <view class='btn btn-danger' bindtap="syncRemote" data-type="result">公布身份</view>
+        <view class='btn btn-success vote' bindtap="createVote">发起投票</view>
+        <view class="btn-group">
+            <view class='btn btn-danger' bindtap="resetGame">重新开始</view>
+            <view class='btn btn-danger' bindtap="startGame">重新发牌</view>
+            <view class='btn btn-danger' bindtap="openAllRoles">公布身份</view>
+        </view>
     </block>
 </block>
 
 <!-- 非法官视角 -->
 <block wx:else>
-    <card wx:if="{{stage>=1}}" type="{{me.role.type}}" police/>
+    <card
+        wx:if="{{stage===1}}" 
+        shake="{{myCardShake}}" 
+        type="{{me.role.type}}"
+        police
+    />
 </block>
 
-<!-- 投票 -->
-<!-- <vote /> -->
+<!-- 投票器 wx:if="{{stage===2}}" -->
+<voter
+    view-mode="{{isHost || voted}}"
+    shake="{{voterShake}}"
+    tickets="{{tickets}}" 
+    options="{{players}}" 
+    bind:voted="{{onVoted}}" 
+/>
