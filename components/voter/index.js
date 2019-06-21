@@ -24,7 +24,9 @@ Component({
     data: {
         checked: null,
     },
-
+    attached(){
+        wx.vibrateShort()
+    },
     /**
      * 组件的方法列表
      */
