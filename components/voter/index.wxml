@@ -1,6 +1,7 @@
+<block wx:if="{{visible}}">
 <!-- 观众模式 -->
 <view wx:if="{{viewMode}}" class='frame'>
-    <scroll-view scroll-y class='card viewmode {{shake? "shake": ""}}'>
+    <scroll-view scroll-y class='box viewmode {{shake? "shake": ""}}'>
         <view class="options viewmode left">
             <view 
                 class="option"
@@ -17,15 +18,17 @@
                 wx:for-item="option" 
                 wx:key="{{option.userId}}">
                 <player simple player="{{option}}"></player>
+                <view wx:if="{{count[option.userId]>0}}" class="count">{{count[option.userId]}}</view>
             </view>
         </view>
     </scroll-view>
-    <view class="btn btn-info confirm">确定</view>
+    <view wx:if="{{isHost}}" class="btn btn-danger confirm" bindtap="closeVote">关闭投票</view>
+    <view wx:else class="btn btn-danger confirm" bindtap="hideVote">关闭投票器</view>
 </view>
 
 <!-- 普通模式 -->
 <view wx:else class='frame'>
-    <scroll-view scroll-y class='card {{shake? "shake": ""}}'>
+    <scroll-view scroll-y class='box {{shake? "shake": ""}}'>
         <view class="options">
             <view 
                 bindtap="onCheck"
@@ -40,5 +43,7 @@
             </view>
         </view>
     </scroll-view>
-    <view class="btn btn-info confirm">确定</view>
+    <view class="btn btn-info confirm" bindtap="vote">确定</view>
 </view>
+
+</block>

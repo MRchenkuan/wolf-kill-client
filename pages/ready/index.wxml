@@ -34,7 +34,7 @@
     <block wx:if="{{stage === 1}}">
         <view class='btn btn-success vote' bindtap="createVote">发起投票</view>
         <view class="btn-group">
-            <view class='btn btn-danger' bindtap="resetGame">重新开始</view>
+            <view class='btn btn-danger' bindtap="resetGame">重置房间</view>
             <view class='btn btn-danger' bindtap="startGame">重新发牌</view>
             <view class='btn btn-danger' bindtap="openAllRoles">公布身份</view>
         </view>
@@ -44,7 +44,7 @@
 <!-- 非法官视角 -->
 <block wx:else>
     <card
-        wx:if="{{stage===1}}" 
+        wx:if="{{stage>=1}}" 
         shake="{{myCardShake}}" 
         type="{{me.role.type}}"
         police
@@ -53,9 +53,14 @@
 
 <!-- 投票器 wx:if="{{stage===2}}" -->
 <voter
-    view-mode="{{isHost || voted}}"
+    wx:if="{{stage===2}}"
+    vid="{{voter.id}}"
+    is-host="{{isHost}}"
+    view-mode="{{isHost || isVoted}}"
+    bind:vote="onVote"
+    bind:hide="onVoterHide"
+    bind:close="onVoterClose"
     shake="{{voterShake}}"
-    tickets="{{tickets}}" 
-    options="{{players}}" 
-    bind:voted="{{onVoted}}" 
+    tickets="{{voter.tickets}}" 
+    options="{{alives}}" 
 />

@@ -27,6 +27,18 @@ export default {
         url: "/gameover",
         method: 'post'
     },
+    'vote': {
+      url: "/vote",
+      method: 'post'
+    },
+    'createVote': {
+      url: "/createvote",
+      method: 'post'
+    },
+    'closeVote':{
+      url: "/closevote",
+      method: 'post'
+    },
     'getTable':{
         url: "/join",
         method: 'post'

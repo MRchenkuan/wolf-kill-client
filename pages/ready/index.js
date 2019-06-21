@@ -17,15 +17,16 @@ Page({
         isHost: false,
         seats: 12,
         judge: {}, //法官
-        players:[],
+        players:[], // 玩家
+        alives: [], // 活人
         roles: [], // 角色列表
         roleMap: [], // 角色方案
         stage: 0, // 游戏阶段 0:准备, 1:进行中，2:投票中， -1:已结束， 
         me: {},
         myCardShake: true,
         voterShake: true,
-        tickets: [], //选票
-        voted: false, // 是否已投票
+        isVoted: false, // 是否已投票
+        voter: {} // 当前的
     },
     ...openidBehavior.member,
     ...authorizeBehavior.member,
@@ -112,23 +113,40 @@ Page({
     syncLocal(userId, table){
         return new Promise((resolve, reject)=>{
             try{
-                const { ownerId, player, roleMap, status, seats, roles } = table;
+              const { ownerId, player, roleMap, status, seats, roles, voter } = table;
                 // 座位
                 this.seats = seats;
                 // 我是谁
                 const me = player.find(it => it.userId === userId) || {}
+                // 法官
+                const judge = player.find(it => it.isJudge) || {}
+                // 玩家
+                const players = player.filter(it => !it.isJudge);
+                // 活人
+                const alives = players.filter(it=>it.alive)
+                // 投票
+                const { tickets, status: voteStatus, id: voteId } = voter;
+                if(this.data.stage !== status){
+                  wx.vibrateShort()
+                }
                 // 同步信息
                 this.setData({
                     // 游戏阶段
                     stage: status,
                     // 玩家列表
-                    players: player.filter(it => !it.isJudge),
+                    players,
+                    // 活人
+                    alives,
                     // 法官
-                    judge: player.find(it => it.isJudge) || {},
+                    judge,
                     // 角色方案
                     roleMap: this.transformRoleMap(roleMap),
                     // 当前是否房主
                     isHost: ownerId === userId,
+                    // 最近一次投票
+                    voter,
+                    // 我是否已投票
+                    isVoted: !!tickets[userId],
                     // 我的信息
                     me,
                 }, resolve);
@@ -234,12 +252,35 @@ Page({
             this.eventRouter(name, data);
         });
     },
-
+    /**
+     * 创建一个投票
+     */
+    createVote(){
+      getOpenId().then(userId => {
+        api.createVote({ userId, tableId: this.tableId }).then((table) => {
+          this.syncLocal(userId, table)
+        })
+      })
+    },
     /**
      * 完成投票时触发
      */
-    onVoted({target: {detail}}){
-        debugger
+    onVote(e){
+      const {vid, to} = e.detail;
+      getOpenId().then(userId => {
+        api.vote({ userId, tableId: this.tableId, vid, to }).then((table)=>{
+          this.syncLocal(userId, table)
+        })
+      })
+    },
+
+    onVoterClose(e){
+      const { vid } = e.detail;
+      getOpenId().then(userId => {
+        api.closeVote({ userId, tableId: this.tableId, vid }).then((table) => {
+          this.syncLocal(userId, table)
+        })
+      })
     },
     /**
      * 显示时触发

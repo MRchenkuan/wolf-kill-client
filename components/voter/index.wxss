@@ -31,10 +31,26 @@
 .btn-info{
     background: linear-gradient(to bottom right, #03A9F4, #3F51B5);
 }
-.card.viewmode{
+.box.viewmode{
     padding: 26rpx;
 }
-.card{
+.count{
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40rpx;
+  color: #fff;
+  font-weight: 900;
+  border-radius: 100%;
+  background: linear-gradient(to bottom right, #ff8069, #e70012);
+}
+.box{
     padding:40rpx;
     width:85vw;
     height:68vh;
@@ -85,7 +101,7 @@
     position: relative;
 }
 
-.card.shake{
+.box.shake{
     animation: shake 1000ms;
 }
 
