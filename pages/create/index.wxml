@@ -1,2 +1,4 @@
+<game-canvas blur scale animate/>
+
 <!--pages/create/index.wxml-->
 <view bindtap='create' class='btn-start'>创建房间</view>

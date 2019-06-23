@@ -98,3 +98,10 @@
     text-align: center;
     max-height: 45%;
 }
+.frame{
+    position: relative;
+}
+.tool{
+    position: absolute;
+    right: 0;top: 0;
+}

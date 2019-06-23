@@ -11,6 +11,10 @@ Component({
             this.setData({ visible: true })
           }
         },
+        name: {
+            type: String,
+            default: "投票器",
+        },
         isHost: {
           type: Boolean,
           default: false,
@@ -53,24 +57,35 @@ Component({
     attached(){
         wx.vibrateShort()
     },
+    dettached(){
+        wx.vibrateShort()
+    },
     /**
      * 组件的方法列表
      */
     methods: {
       onCheck(e){
           const checked = e.currentTarget.dataset.checked;
+          wx.vibrateShort()
           this.setData({checked: checked.userId});
       },
       vote(e){
         if(this.data.checked){
+            wx.vibrateShort()
           this.triggerEvent('vote', { vid: this.data.vid, to: this.data.checked})
         }
       },
       closeVote(){
-        this.triggerEvent('close', { vid: this.data.vid })
+        this.triggerEvent('close', { vid: this.data.vid });
+          wx.vibrateShort()
       },
       hideVote(){
+        wx.vibrateShort()
         this.setData({ visible: false})
+      },
+      showVoter(){
+        this.setData({ visible: true });
+        wx.vibrateShort()
       }
     }
 })

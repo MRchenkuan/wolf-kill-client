@@ -1,4 +1,5 @@
 <view class='frame'>
+    <game-canvas blur scale/>
     <view class='card {{shake? "shake": ""}}'>
         <image src='./images/{{police?"officer":"back"}}.jpg' class='front'></image>
         <image src='./images/{{type}}.jpg' class='back'></image>

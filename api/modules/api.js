@@ -39,6 +39,10 @@ export default {
       url: "/closevote",
       method: 'post'
     },
+    'markPlayer': {
+        url: "/markplayer",
+        method: 'post'
+    }, 
     'getTable':{
         url: "/join",
         method: 'post'

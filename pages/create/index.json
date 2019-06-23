@@ -1,5 +1,7 @@
 {
   "usingComponents": {
+            "game-canvas": "../../components/game-canvas/index",
+            
         "card": "../../components/card/index"
         
   }

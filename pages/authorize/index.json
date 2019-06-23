@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "微信授权登录"
+    "navigationBarTitleText": "微信授权登录",
+    "usingComponents": {
+        "game-canvas": "../../components/game-canvas/index"
+    }
 }

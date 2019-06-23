@@ -1,5 +1,5 @@
 <!--components/Seat/index.wxml-->
-<view class="frame" bindtap="{{onTap}}">
+<view class="frame" bindtap="onTap">
     <view class='seat{{judge?" judge": ""}}'>
         <view wx:if="{{!player}}" class='empty'>+</view>
         <image class='avt' src='{{player.avt}}'></image>
@@ -12,3 +12,4 @@
     <view wx:if="{{simple}}" class='simplename'>{{player.name}}</view>
     <view wx:if="{{!simple}}" class='name'>{{player.name}}</view>
 </view>
+

@@ -27,7 +27,7 @@
 }
 
 .btn-group{
-    margin: 20rpx 10rpx;
+    margin: 30rpx;
     display: flex;
     justify-content: space-between;
 }
@@ -43,7 +43,7 @@
     width: auto;
     height: 50rpx;
     line-height: 50rpx;
-    margin: 80rpx 10rpx 0;
+    margin: 80rpx 30rpx 0;
 }
 
 page{
@@ -74,6 +74,21 @@ page::before{
     }
 }
 
-.contianer{
+.container{
     padding: 5vw 20rpx 0;
+}
+
+.mark-items>view{
+    margin: 20rpx;
+    padding: 20rpx;
+    font-size: 30rpx;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10rpx;
+    text-align: center;
+}
+.mark-items .head{
+    padding: 5rpx;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10rpx;
+    display:inline-block;
 }

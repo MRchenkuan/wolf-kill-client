@@ -19,7 +19,7 @@ Component({
         simple: {
             type: Boolean,
             default: false,
-        }
+        },
     },
 
     /**
@@ -34,7 +34,7 @@ Component({
      */
     methods: {
         onTap(){
-            this.triggerEvent('tap', this.data.player)
+            this.triggerEvent('click', this.data.player)
         }
     }
 })

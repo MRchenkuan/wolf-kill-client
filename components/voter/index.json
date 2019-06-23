@@ -1,6 +1,7 @@
 {
     "component": true,
     "usingComponents": {
-        "player": "../seat/index"
+        "player": "../seat/index",
+        "game-canvas": "../game-canvas/index"
     }
 }

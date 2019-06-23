@@ -7,7 +7,9 @@
     bottom: 0;
     width: 100%;
     background: rgba(0,0,0,.3);
+    z-index: 9;
 }
+
 .btn {
     padding: 20rpx;
     width: 50%;
@@ -51,6 +53,7 @@
   background: linear-gradient(to bottom right, #ff8069, #e70012);
 }
 .box{
+    overflow:hidden;
     padding:40rpx;
     width:85vw;
     height:68vh;
@@ -103,6 +106,30 @@
 
 .box.shake{
     animation: shake 1000ms;
+}
+.show-voter{
+    position: absolute;
+    bottom: 150rpx;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 9;
+}
+
+.voter-name{
+    color: #6e5a34;
+    text-shadow: 1px 1px 1px #fdf1db;
+    font-size: 28rpx;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+}
+
+.voter-name.viewmode{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    width: 30rpx;
 }
 
 @keyframes shake{

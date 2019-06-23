@@ -26,7 +26,8 @@ Page({
         myCardShake: true,
         voterShake: true,
         isVoted: false, // 是否已投票
-        voter: {} // 当前的
+        voter: {}, // 当前的投票
+        markerVisiable: false, // 身份标记器是否可见
     },
     ...openidBehavior.member,
     ...authorizeBehavior.member,
@@ -126,9 +127,9 @@ Page({
                 const alives = players.filter(it=>it.alive)
                 // 投票
                 const { tickets, status: voteStatus, id: voteId } = voter;
-                if(this.data.stage !== status){
-                  wx.vibrateShort()
-                }
+                // if(this.data.stage !== status){
+                //   wx.vibrateShort()
+                // }
                 // 同步信息
                 this.setData({
                     // 游戏阶段
@@ -274,6 +275,9 @@ Page({
       })
     },
 
+    /**
+     * 关闭投票时触发
+     */
     onVoterClose(e){
       const { vid } = e.detail;
       getOpenId().then(userId => {
@@ -281,6 +285,38 @@ Page({
           this.syncLocal(userId, table)
         })
       })
+    },
+    /**
+     * 点击用户头像
+     */
+    showMarker({ detail }){
+        // 打开法官标记器
+        this.setData({
+            markerVisiable: true,
+            markerTarget: detail,
+        })
+    },
+    /**
+     * 隐藏标记器
+     */
+    hideMarker(){
+        this.setData({
+            markerVisiable: false,
+            markerTarget: null,
+        })
+    },
+    /**
+     * 法官标记警长
+     */
+    markPlayer(e) {
+        const type = e.currentTarget.dataset.type;
+        const target = this.data.markerTarget.userId;
+        getOpenId().then(userId => {
+            api.markPlayer({ userId, tableId: this.tableId, target, type }).then((table) => {
+                this.syncLocal(userId, table)
+            })
+        })
+        this.hideMarker();
     },
     /**
      * 显示时触发

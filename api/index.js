@@ -15,7 +15,7 @@ import wsCommon from './websocket/common.js'
  * 导出
  */
 // export const commonApi = registerModule('http://localhost:3000', common);
-export const commonApi = registerModule('http://192.168.1.10:3000', common);
+export const commonApi = registerModule('http://192.168.1.105:3000', common);
 
 
-export const commonSocket = wsCommon("ws://192.168.1.10:3000");
+export const commonSocket = wsCommon("ws://192.168.1.105:3000");

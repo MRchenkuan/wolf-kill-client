@@ -1,49 +1,55 @@
 <block wx:if="{{visible}}">
-<!-- 观众模式 -->
-<view wx:if="{{viewMode}}" class='frame'>
-    <scroll-view scroll-y class='box viewmode {{shake? "shake": ""}}'>
-        <view class="options viewmode left">
-            <view 
-                class="option"
-                wx:for="{{options}}" 
-                wx:for-item="option" 
-                wx:key="{{option.userId}}">
-                <player simple player="{{option}}"></player>
+    <!-- 观众模式 -->
+    <view wx:if="{{viewMode}}" class='frame'>
+        <game-canvas blur scale/>
+        <scroll-view scroll-y class='box viewmode {{shake? "shake": ""}}'>
+            <view class="options viewmode left">
+                <view 
+                    class="option"
+                    wx:for="{{options}}" 
+                    wx:for-item="option" 
+                    wx:key="{{option.userId}}">
+                    <player simple player="{{option}}" alive="{{option.alive}}"></player>
+                </view>
             </view>
-        </view>
-        <view class="options viewmode right">
-            <view 
-                class="option"
-                wx:for="{{options}}" 
-                wx:for-item="option" 
-                wx:key="{{option.userId}}">
-                <player simple player="{{option}}"></player>
-                <view wx:if="{{count[option.userId]>0}}" class="count">{{count[option.userId]}}</view>
+            <view class='viewmode voter-name'>{{name}}结果</view>
+            <view class="options viewmode right">
+                <view 
+                    class="option"
+                    wx:for="{{options}}" 
+                    wx:for-item="option" 
+                    wx:key="{{option.userId}}">
+                    <player simple player="{{option}}" alive="{{option.alive}}"></player>
+                    <view wx:if="{{count[option.userId]>0}}" class="count">{{count[option.userId]}}</view>
+                </view>
             </view>
-        </view>
-    </scroll-view>
-    <view wx:if="{{isHost}}" class="btn btn-danger confirm" bindtap="closeVote">关闭投票</view>
-    <view wx:else class="btn btn-danger confirm" bindtap="hideVote">关闭投票器</view>
-</view>
+        </scroll-view>
+        <view wx:if="{{isHost}}" class="btn btn-danger confirm" bindtap="closeVote">关闭投票</view>
+        <view wx:else class="btn btn-danger confirm" bindtap="hideVote">关闭投票器</view>
+    </view>
 
-<!-- 普通模式 -->
-<view wx:else class='frame'>
-    <scroll-view scroll-y class='box {{shake? "shake": ""}}'>
-        <view class="options">
-            <view 
-                bindtap="onCheck"
-                class="option"
-                wx:for="{{options}}" 
-                wx:for-item="option" 
-                wx:for-index="index"
-                data-checked="{{option}}"
-                wx:key="{{option.userId}}">
-                <player player="{{option}}"></player>
-                <image src="./images/round.png" class="round" wx:if="{{checked && (checked === option.userId)}}"/>
+    <!-- 普通模式 -->
+    <view wx:else class='frame'>
+        <game-canvas blur scale/>
+        <scroll-view scroll-y class='box {{shake? "shake": ""}}'>
+            <view class='voter-name'>{{name}}</view>
+            <view class="options">
+                <view 
+                    bindtap="onCheck"
+                    class="option"
+                    wx:for="{{options}}" 
+                    wx:for-item="option" 
+                    wx:for-index="index"
+                    data-checked="{{option}}"
+                    wx:key="{{option.userId}}">
+                    <player player="{{option}}" alive="{{option.alive}}"></player>
+                    <image src="./images/round.png" class="round" wx:if="{{checked && (checked === option.userId)}}"/>
+                </view>
             </view>
-        </view>
-    </scroll-view>
-    <view class="btn btn-info confirm" bindtap="vote">确定</view>
-</view>
+        </scroll-view>
+        <view class="btn btn-info confirm" bindtap="vote">确定</view>
+    </view>
 
 </block>
+
+<view wx:else class="btn btn-info show-voter" bindtap="showVoter">投票中...</view>

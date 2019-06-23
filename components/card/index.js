@@ -19,7 +19,7 @@ Component({
         police: {
             type: Boolean,
             default: false,
-        }
+        },
     },
 
     /**

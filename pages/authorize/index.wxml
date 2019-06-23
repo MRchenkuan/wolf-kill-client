@@ -1,4 +1,6 @@
 <view class='frame'>
+    <game-canvas blur scale animate/>
+
     <view class='text'>申请获取以下权限</view>
     <view class='text'>获得你的公开信息（昵称、头像等）</view>
     <button type="primary" class="btn" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">微信授权登录</button>
