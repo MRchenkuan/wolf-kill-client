@@ -33,7 +33,7 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform-style: preserve-3d;
-    transition:transform ease-in-out 600ms;
+    transition:transform ease-in-out 600ms,filter ease-in-out 600ms;
     transform: perspective(3000rpx) rotateY(0);
     box-shadow: 0 0 20rpx 5rpx #000;
     border-radius: 20rpx;
@@ -101,4 +101,34 @@
         transform: perspective(3000rpx) rotateY(0deg);
      transition-timing-function: ease-out;
     }
+}
+
+.btn {
+    padding: 20rpx;
+    width: 50%;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #fff;
+    margin: 40rpx auto 0;
+    text-align: center;
+    border-radius: 10rpx;
+}
+
+.btn.btn-show-table{
+    width: 60rpx;
+    height: 60rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    bottom: 80rpx;
+    right: 80rpx;
+    position: absolute;
+}
+
+.btn-success{
+    background: linear-gradient(to bottom right, #8BC34A, #4CAF50);
+}
+.dead{
+    filter: grayscale();
 }

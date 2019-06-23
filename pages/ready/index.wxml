@@ -66,13 +66,22 @@
         wx:if="{{stage>=1}}" 
         shake="{{myCardShake}}" 
         type="{{me.role.type}}"
-        police
+        alive="{{me.alive}}"
+        police="{{sheriff===me.userId}}"
     />
     <!-- 标记器 -->
     <dialog animation="scale" bind:hide="hideMarker" wx:if="{{markerVisiable}}">
         <view slot="content" class='mark-items'>
-            <view>狼人</view>
-            <view>好人</view>
+            <view class="head">
+                <seat
+                    horizontal
+                    open="{{true}}"
+                    player="{{markerTarget}}"
+                    alive="{{markerTarget.alive}}"
+                />
+            </view>
+            <view catchtap="markPlayer" data-type="wolf">狼人</view>
+            <view catchtap="markPlayer" data-type="safe">好人</view>
         </view>
     </dialog>
 </block>

@@ -20,6 +20,10 @@ Component({
             type: Boolean,
             default: false,
         },
+        alive:{
+            type: Boolean,
+            default: false,
+        }
     },
 
     /**

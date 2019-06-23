@@ -114,7 +114,7 @@ Page({
     syncLocal(userId, table){
         return new Promise((resolve, reject)=>{
             try{
-              const { ownerId, player, roleMap, status, seats, roles, voter } = table;
+                const { ownerId, player, roleMap, status, seats, roles, voter, sheriff } = table;
                 // 座位
                 this.seats = seats;
                 // 我是谁
@@ -127,9 +127,9 @@ Page({
                 const alives = players.filter(it=>it.alive)
                 // 投票
                 const { tickets, status: voteStatus, id: voteId } = voter;
-                // if(this.data.stage !== status){
-                //   wx.vibrateShort()
-                // }
+                
+                if (this.data.sheriff !== sheriff) this.shakeMyCard();
+                if (this.data.me.alive !== me.alive) this.shakeMyCard();
                 // 同步信息
                 this.setData({
                     // 游戏阶段
@@ -148,6 +148,8 @@ Page({
                     voter,
                     // 我是否已投票
                     isVoted: !!tickets[userId],
+                    // 警长
+                    sheriff,
                     // 我的信息
                     me,
                 }, resolve);

@@ -52,4 +52,4 @@
 
 </block>
 
-<view wx:else class="btn btn-info show-voter" bindtap="showVoter">投票中...</view>
+<!-- <view wx:else class="btn btn-info show-voter" bindtap="showVoter">投票中...</view> -->
