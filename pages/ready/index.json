@@ -2,7 +2,8 @@
   "usingComponents": {
     "game-canvas": "../../components/game-canvas/index",
     "role-marker": "../../components/role-marker/index",
-            "dialog": "../../components/dialog/index",
+    "dialog": "../../components/dialog/index",
+    "counter": "../../components/counter/index",
     "seat": "../../components/seat/index",
     "card": "../../components/card/index",
     "role": "../../components/role/index",

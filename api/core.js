@@ -44,7 +44,13 @@ export const fetch = (url, params = {}, options = {}, mockData) => {
                     resolve(data);
                 } else {
                     // todo
-                    if (!silence) showToast("发生了一些小问题~")
+                    if (!silence) showToast("发生了一些小问题~");
+                    // todo notvalidroom
+                    if (rspCode === 'notvalidroom'){
+                        wx.redirectTo({
+                            url: '/pages/create/index',
+                        })
+                    }
                     reject((res || {}).data || {});
                 }
             },

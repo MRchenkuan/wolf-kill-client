@@ -44,7 +44,7 @@ export default {
         method: 'post'
     }, 
     'getTable':{
-        url: "/join",
+        url: "/sync",
         method: 'post'
     }
 }

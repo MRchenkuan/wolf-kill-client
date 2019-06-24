@@ -2,6 +2,7 @@
     "component": true,
     "usingComponents": {
         "player": "../seat/index",
+        "dialog": "../dialog/index",
         "game-canvas": "../game-canvas/index"
     }
 }

@@ -18,6 +18,7 @@ Page({
         seats: 12,
         judge: {}, //法官
         players:[], // 玩家
+        viewers: [], // 观众
         alives: [], // 活人
         roles: [], // 角色列表
         roleMap: [], // 角色方案
@@ -43,7 +44,7 @@ Page({
         // 加入游戏
         const { tableId } = options;
         this.tableId = tableId;
-        // this.joinGame(tableId)
+        this.joinGame(tableId)
     },
     shakeMyCard(){
         this.setData({ myCardShake: false}, ()=>{
@@ -78,6 +79,11 @@ Page({
      * 开始游戏
      */
     startGame(){
+        const { seats, players, roleMap} = this.data;
+        const roleCount = Object.values(roleMap).reduce((a, b) => a + b.count, 0);
+        if(seats!==players.length) return showToast('玩家数与座位数不匹配，请调整座位');
+        if (roleCount > seats) return showToast('角色牌过多');
+        if (roleCount < seats) return showToast('角色牌太少');
         getOpenId().then(userId => {
             api.startGame({ userId, tableId: this.tableId }).then(table=>{
                 // 同步房间信息
@@ -122,7 +128,9 @@ Page({
                 // 法官
                 const judge = player.find(it => it.isJudge) || {}
                 // 玩家
-                const players = player.filter(it => !it.isJudge);
+                const players = player.filter(it => it.isPlayer);
+                // 观众
+                const viewers = player.filter(it => it.isViewer);
                 // 活人
                 const alives = players.filter(it=>it.alive)
                 // 投票
@@ -132,8 +140,11 @@ Page({
                 if (this.data.me.alive !== me.alive) this.shakeMyCard();
                 // 同步信息
                 this.setData({
+                    seats,
                     // 游戏阶段
                     stage: status,
+                    // 观众列表
+                    viewers,
                     // 玩家列表
                     players,
                     // 活人
@@ -158,7 +169,7 @@ Page({
             }
         })
     },
-    pullRemote(){
+    syncRemote(){
         return new Promise((resolve, reject)=>{
             getOpenId().then(userId => {
                 api.getTable({ userId, tableId: this.tableId }).then(table => {
@@ -181,10 +192,10 @@ Page({
                 this.setData({ stage: data });
                 break;
             case "sync": // 主动远程同步
-                this.pullRemote();
+                this.syncRemote();
                 break;
             case "start": // 游戏开始，摇晃卡片
-                this.pullRemote().then(()=>{
+                this.syncRemote().then(()=>{
                     this.shakeMyCard();
                 }).catch(e=>{
                     console.log(e)
@@ -209,20 +220,50 @@ Page({
         const roleCount = roleMap.reduce((a, b)=>{
             return a + b.count;
         }, 0)
-        if (roleCount >= this.data.seats) return showToast('请减少其他身份');
-        roleMap.find(it => it.key === detail).count++
+        const _roleMap = {}
+        roleMap.map(role=>{
+            _roleMap[role.key] = role.count;
+        })
+        
+        let othersCount = roleCount - _roleMap.Wolf - _roleMap.Villager;
+
+        switch (detail){
+            case 'Wolf': 
+                _roleMap.Wolf++;
+                _roleMap.Villager = Math.max(1, this.data.seats - othersCount - _roleMap.Wolf);
+                break;
+            case 'Villager': 
+                _roleMap.Villager++;
+                _roleMap.Wolf = Math.max(1, this.data.seats - othersCount - _roleMap.Villager);
+                break;
+            default: 
+                if(_roleMap[detail]>0) {
+                    _roleMap[detail] = 0;
+                    othersCount -= 1;
+                } else {
+                    _roleMap[detail] = 1;
+                    othersCount += 1;
+                }
+                _roleMap.Villager = Math.max(1, this.data.seats - othersCount - _roleMap.Wolf);
+            break;
+        }
+        if (!(_roleMap.Wolf > 0)) return showToast('狼人数量必须大于1');
+        if (!(_roleMap.Villager > 0)) return showToast('村民数量必须大于1');
+        roleMap.map(role=>{
+            role.count = _roleMap[role.key] || 0;
+        })
         this.changeRoleCount(roleMap);
     },
     /**
      * 减少角色数量
      */
-    decreaseRole({ detail }){
-        const roleMap = this.data.roleMap;
-        const role = roleMap.find(it => it.key === detail);
-        if(role.count<=0) return;
-        role.count--;
-        this.changeRoleCount(roleMap);
-    },
+    // decreaseRole({ detail }){
+    //     const roleMap = this.data.roleMap;
+    //     const role = roleMap.find(it => it.key === detail);
+    //     if(role.count<=0) return;
+    //     role.count--;
+    //     this.changeRoleCount(roleMap);
+    // },
     /**
      * 修改角色方案
      */
@@ -240,7 +281,6 @@ Page({
                 tableId: this.tableId
             });
         })
-        // todo sync remote
     },
 
     /**
@@ -292,11 +332,15 @@ Page({
      * 点击用户头像
      */
     showMarker({ detail }){
-        // 打开法官标记器
-        this.setData({
-            markerVisiable: true,
-            markerTarget: detail,
-        })
+        // 游戏运行中可打开
+        if(this.data.stage>0 || this.data.me.isJudge) {
+            // 打开法官标记器
+            this.setData({
+                markerVisiable: true,
+                markerTarget: detail,
+            })
+        }
+        
     },
     /**
      * 隐藏标记器
@@ -308,23 +352,42 @@ Page({
         })
     },
     /**
-     * 法官标记警长
+     * 法官标记警长paplayerspsfdssf
      */
     markPlayer(e) {
         const type = e.currentTarget.dataset.type;
-        const target = this.data.markerTarget.userId;
+        const target = (this.data.markerTarget||{}).userId;
+        this.hideMarker();
         getOpenId().then(userId => {
             api.markPlayer({ userId, tableId: this.tableId, target, type }).then((table) => {
                 this.syncLocal(userId, table)
             })
         })
-        this.hideMarker();
+    },
+    /**
+     * 法官设置座位
+     */
+    onSeatChange(e){
+        const value = e.detail;
+        const {seats, players} = this.data;
+        if (seats!=value && (value >= players.length) && (value <= 14)){
+            getOpenId().then(userId => {
+                api.updateTable({
+                    key: 'seats',
+                    data: value,
+                    userId,
+                    tableId: this.tableId
+                }).then((table) => {
+                    this.syncLocal(userId, table)
+                });
+            })
+        }
     },
     /**
      * 显示时触发
      */
     onShow(){
-        this.joinGame(this.tableId);
+        this.joinGame(this.tableId)
     },
     /**
      * 用户点击右上角分享

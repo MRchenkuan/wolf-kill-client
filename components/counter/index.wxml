@@ -1,8 +1,15 @@
 <view class="hanzo-counter">
     <view class="options {{value <= min? 'disabled':''}}" bindtap="onMinus">
-        <icon type='indexcartminus' size='37rpx' color="{{value <= min? '#D8D8D8':'#e20013'}}" />
+        <icon type='indexcartminus' size='74rpx' color="{{value <= min? '#D8D8D8':'#e20013'}}" />
+    </view>
+    <view wx:if="{{editable}}">
+        <input bindinput="onInput" class="input" type="number" min="{{min}}" value="{{value}}" max="{{max}}"
+            disabled>{{value}}</input>
+    </view>
+    <view wx:else class="input" bindtap="onPlus">
+        {{value}}
     </view>
     <view class="options {{value >= max ? 'disabled':''}}" bindtap="onPlus">
-        <icon type='indexcartadd' size='37rpx' color="{{value >= max? '#D8D8D8':'#e20013'}}" />
+        <icon type='indexcartadd' size='74rpx' color="{{value >= max? '#D8D8D8':'#e20013'}}" />
     </view>
 </view>

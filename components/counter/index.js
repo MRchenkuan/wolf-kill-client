@@ -56,7 +56,10 @@ Component({
     },
     // 更新值
     update(newVal) {
-      return;
+      if (this.data.async) return;
+      this.setData({
+        value: newVal
+      });
     }
   }
 });

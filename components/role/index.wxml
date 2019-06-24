@@ -4,4 +4,4 @@
     <view class='dot{{count?"":" empty"}}'>{{count}}</view>
 </view>
 <view class='name'>{{name}}</view>
-<view wx:if="{{!readOnly}}" class="decrease" bindtap='decrease'>减少</view>
+<!-- <view wx:if="{{!readOnly}}" class="decrease" bindtap='decrease'>减少</view> -->

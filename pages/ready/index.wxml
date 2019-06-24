@@ -1,6 +1,15 @@
 <game-canvas blur scale animate/>
 
-<view wx:if="{{stage<1 || isHost}}" class='container'>
+<view wx:if="{{stage<1 || me.isJudge || me.isViewer}}" class='container'>
+    <text class='title'>座位数</text>
+    <counter
+        wx:if="{{me.isJudge && stage==0}}" 
+        value="{{seats||1}}" 
+        max="14"
+        min="{{players.length}}" 
+        bind:plus="onSeatChange" 
+        bind:minus="onSeatChange"
+    />
     <text class='title'>玩家</text>
     <view class='players'>
         <seat judge player="{{judge}}" alive="{{true}}"/>
@@ -9,7 +18,7 @@
             wx:for-item="index" 
             wx:key="{{index}}"
             bind:click="showMarker"
-            open="{{isHost || stage===-1}}"
+            open="{{me.isJudge || stage===-1}}"
             player="{{players[index]}}"
             alive="{{players[index].alive}}"
         />
@@ -17,7 +26,8 @@
     <text class='title'>角色</text>
      <view class='roles'>
         <role
-            readOnly="{{!isHost || stage!==0}}"
+            wx:if="{{role.count>0 || stage==0}}"
+            readOnly="{{!me.isJudge || stage!==0}}"
             wx:for="{{roleMap}}" 
             wx:for-item="role"
             bind:increase="increaseRole"
@@ -31,37 +41,42 @@
 </view>
 
 <!-- 法官视角 -->
-<block wx:if="{{isHost}}">
+<block wx:if="{{me.isJudge}}">
     <view wx:if="{{stage === -1}}" class='btn btn-warn' bindtap="resetGame">重新开始</view>
     <view wx:if="{{stage === 0}}" class='btn btn-success' bindtap="startGame">开始游戏</view>
     <block wx:if="{{stage === 1}}">
         <view class='btn btn-success vote' bindtap="createVote">发起投票</view>
         <view class="btn-group">
-            <view class='btn btn-danger' bindtap="resetGame">重置房间</view>
+            <view class='btn btn-danger' bindtap="resetGame">结束该局</view>
             <view class='btn btn-danger' bindtap="startGame">重新发牌</view>
             <view class='btn btn-warn' bindtap="openAllRoles">公布身份</view>
         </view>
     </block>
     <!-- 标记器 -->
-    <dialog animation="scale" bind:hide="hideMarker" wx:if="{{markerVisiable}}">
+    <dialog animation="scale" bind:hide="hideMarker" wx:if="{{markerTarget && markerVisiable}}">
         <view slot="content" class='mark-items'>
-            <view class="head">
-                <seat
-                    horizontal
-                    open="{{true}}"
-                    player="{{markerTarget}}"
-                    alive="{{markerTarget.alive}}"
-                />
-            </view>
-            <view catchtap="markPlayer" data-type="sheriff">标记为警长</view>
-            <view catchtap="markPlayer" data-type="out">标记出局</view>
-            <view catchtap="markPlayer" data-type="alive">标记存活</view>
+            <seat
+                class="head"
+                horizontal
+                open="{{true}}"
+                player="{{markerTarget}}"
+                alive="{{markerTarget.alive}}"
+            />
+            <block wx:if="{{stage>0}}">
+                <view wx:if="{{markerTarget.userId !== sheriff}}" catchtap="markPlayer" data-type="sheriff">标记为警长</view>
+                <view wx:else catchtap="markPlayer" data-type="sheriffoff">取消警长</view>
+                <view wx:if="{{markerTarget.alive}}" catchtap="markPlayer" data-type="out">标记出局</view>
+                <view wx:else catchtap="markPlayer" data-type="alive">标记存活</view>
+            </block>
+            <block wx:else>
+                <view catchtap="markPlayer" data-type="kickout">踢出</view>
+            </block>
         </view>
     </dialog>
 </block>
 
-<!-- 非法官视角 -->
-<block wx:else>
+<!-- 玩家视角 -->
+<block wx:elif="{{me.isPlayer}}">
     <card
         wx:if="{{stage>=1}}" 
         shake="{{myCardShake}}" 
@@ -86,17 +101,22 @@
     </dialog>
 </block>
 
+<!-- 观众视角 -->
+<block wx:elif="{{me.isViewer}}">
+    <view class='viewver'>你是观众,请遵守游戏秩序</view>
+</block>
+
 <!-- 投票器 wx:if="{{stage===2}}" -->
 <voter
     wx:if="{{stage===2}}"
     vid="{{voter.id}}"
     name="{{voter.name}}"
     tickets="{{voter.tickets}}" 
-    is-host="{{isHost}}"
-    view-mode="{{isHost || isVoted}}"
+    is-host="{{me.isJudge}}"
+    view-mode="{{me.isJudge || isVoted || me.isViewer}}"
     bind:vote="onVote"
     bind:hide="onVoterHide"
     bind:close="onVoterClose"
     shake="{{voterShake}}"
-    options="{{alives}}" 
+    options="{{players}}" 
 />

@@ -92,3 +92,7 @@ page::before{
     border-radius: 10rpx;
     display:inline-block;
 }
+.viewver{
+    text-align: center;
+    margin-top: 40rpx;
+}
