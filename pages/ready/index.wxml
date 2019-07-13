@@ -3,8 +3,8 @@
 <view wx:if="{{stage<1 || me.isJudge || me.isViewer}}" class='container'>
     <text class='title'>座位数</text>
     <counter
-        wx:if="{{me.isJudge && stage==0}}" 
-        value="{{seats||1}}" 
+        wx:if="{{me.isJudge && stage==0}}"
+        value="{{seats}}"
         max="14"
         min="{{players.length}}" 
         bind:plus="onSeatChange" 
@@ -18,6 +18,7 @@
             wx:for-item="index" 
             wx:key="{{index}}"
             bind:click="showMarker"
+            bind:share="showShare"
             open="{{me.isJudge || stage===-1}}"
             player="{{players[index]}}"
             alive="{{players[index].alive}}"
@@ -38,6 +39,7 @@
             wx:key="{{role.name}}"
         />
     </view>
+    <view wx:if="{{!me.isJudge}}" class='btn btn-danger' bindtap="goOut">自己开个房</view>
 </view>
 
 <!-- 法官视角 -->
@@ -120,3 +122,11 @@
     shake="{{voterShake}}"
     options="{{players}}" 
 />
+
+<!-- 房间打开分享 -->
+<dialog animation="scale" bind:hide="hideShare" wx:if="{{shareVisiable}}">
+    <view slot="content">
+       <view class='share-desc'>转发页面给好友，邀请他们加入房间</view>
+       <button class='btn-share' open-type='share'>点击转发</button>
+    </view>
+</dialog>

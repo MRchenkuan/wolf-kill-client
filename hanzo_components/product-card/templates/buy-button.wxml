@@ -1,0 +1,12 @@
+<template name="buy-button">
+    <view class="cart-button" catchtap="onBtnClick">
+        <!--购物车按钮封面-->
+        <view class="button-cover fresh-house" wx:if="{{type==='FRESH_ENTRY'}}">进入生鲜馆购买</view>
+        <view class="button-cover active" wx:elif="{{status==='ACTIVE' && cartCount===0}}" bindtap="onAdd">加入购物车</view>
+        <view class="button-cover waiting" wx:elif="{{status==='WAITING'}}">{{statusText || "10点销售"}}</view>
+        <view class="button-cover soldout" wx:elif="{{status==='SOLDOUT'}}">抢光了</view>
+        <view class="button-cover over" wx:elif="{{status==='OVER'}}">活动已结束</view>
+        <!--购物车数量控制-->
+        <cart-counter wx:elif="{{(status == 'ACTIVE' || status == 'LACK') && cartCount>0}}" async value="{{cartCount}}" catch:plus="onAdd" catch:minus="onReduce" />
+    </view>
+</template>

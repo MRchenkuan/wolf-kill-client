@@ -1,0 +1,16 @@
+<view bindtap="handleTap" class="h-class hanzo-cell {{ isLastCell ? 'hanzo-cell-last' : '' }} {{ isLink ? 'hanzo-cell-access' : '' }}">
+    <view class="hanzo-cell-icon">
+        <slot name="icon"></slot>
+    </view>
+    <view class="hanzo-cell-bd">
+        <view wx:if="{{ title }}" class="hanzo-cell-text">{{ title }}</view>
+        <view wx:if="{{ label }}" class="hanzo-cell-desc">{{ label }}</view>
+        <slot></slot>
+    </view>
+    <view catchtap="navigateTo" class="hanzo-cell-ft">
+        <block wx:if="{{value}}">{{ value }}</block>
+        <block wx:else>
+            <slot name="footer"></slot>
+        </block>
+    </view>
+</view>

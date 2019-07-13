@@ -1,0 +1,40 @@
+page{
+    height: 100%;
+}
+.shop-cart-card-page{
+    background: #E9EDF1;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.cart-header{
+    background: #016EE9;
+    color: #fff;
+    height: 40rpx;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 32rpx;
+    text-align: right;
+    padding: 20rpx;
+    z-index: 1001;
+}
+.cart-body,.shop-scroll-wrap{
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    right: 0;
+    bottom: 100rpx;
+    padding-bottom: 20rpx;
+    /*overflow: auto;*/
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling: touch;
+}
+.cart-footer{
+
+}
+.shop-scroll-wrap{
+    overflow-x: hidden;
+    overflow-y:scroll;
+}

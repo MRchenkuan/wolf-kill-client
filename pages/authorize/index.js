@@ -17,10 +17,10 @@ Page({
             this.isAuthorize = true;
             wx.setStorageSync('userInfo', e.detail.userInfo);
             app.globalData.userInfo = e.detail.userInfo;
+            wx.navigateBack({
+                delta: 1
+            });
         }
-        wx.navigateBack({
-            delta: 1
-        });
     },
     onAuthorizeFail(){},
     /**

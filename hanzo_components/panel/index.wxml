@@ -1,0 +1,4 @@
+<view class="h-class hanzo-panel">
+    <view wx:if="{{ title }}" class="hanzo-panel-title {{ hideTop ? 'hanzo-panel-title-hide-top' : '' }}">{{ title }}</view>
+    <view class="hanzo-panel-content {{ hideBorder ? 'hanzo-panel-without-border' : '' }}"><slot></slot></view>
+</view>

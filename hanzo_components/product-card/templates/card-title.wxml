@@ -1,0 +1,10 @@
+<template name="card-title">
+    <view class="product-title row {{ (type=='FRESH_ENTRY'||type=='FRESH_HOUSE' || follows==0 || follows=='' ) ? 'type-fresh-house':''}}" bindtap="onCoverClick">
+        <view class="title">{{title}}</view>
+        <view wx:if="{{follows!==0 && follows!=='0' && follows!==''}}" class="split" />
+        <view wx:if="{{follows!==0 && follows!=='0' && follows!==''}}" class="follows">
+            <text class="number">{{follows}}</text>
+            <text class="text">关注人数</text>
+        </view>
+    </view>
+</template>

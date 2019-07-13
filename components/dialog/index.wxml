@@ -1,0 +1,6 @@
+<view class='frame' bindtap="hide">
+    <scroll-view class="dialog {{animation}}" catchtap="noop">
+        <slot name="content"/>
+    </scroll-view>
+    <slot name="options"/>
+</view>

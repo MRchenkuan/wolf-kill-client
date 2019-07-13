@@ -1,0 +1,38 @@
+.hanzo-switch {
+  display: inline-block;
+  position: relative;
+  width: 2em;
+  height: 1em;
+  border: 1rpx solid rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  box-sizing: content-box;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+.hanzo-switch__node {
+  top: 0;
+  left: 0;
+  position: absolute;
+  border-radius: 100%;
+  width: 1em;
+  height: 1em;
+  z-index: 1;
+  transition: 0.3s;
+  box-shadow: 0 3rpx 1rpx 0 rgba(0, 0, 0, 0.05), 0 2rpx 2rpx 0 rgba(0, 0, 0, 0.1), 0 3rpx 3rpx 0 rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+.hanzo-switch__loading {
+  top: 25%;
+  left: 25%;
+  position: absolute !important;
+}
+.hanzo-switch--on {
+  background-color: #1989fa;
+}
+.hanzo-switch--on .hanzo-switch__node {
+  -webkit-transform: translateX(1em);
+          transform: translateX(1em);
+}
+.hanzo-switch--disabled {
+  opacity: 0.4;
+}

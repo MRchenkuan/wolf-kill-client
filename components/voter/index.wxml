@@ -3,32 +3,37 @@
     <view wx:if="{{viewMode}}" class='frame'>
         <game-canvas blur scale/>
         <scroll-view scroll-y class='box viewmode {{shake? "shake": ""}}'>
-            <view class="options viewmode left">
-                <view 
-                    class="option"
-                    wx:for="{{options}}" 
-                    wx:for-item="option" 
-                    wx:key="{{option.userId}}">
-                    <player simple player="{{option}}" alive="{{option.alive}}"></player>
+            <view class='inner-frame' id="voter-inner-frame">
+                <view class="options viewmode left">
+                    <view 
+                        id="fr_{{option.userId}}"
+                        class="option"
+                        wx:for="{{options}}" 
+                        wx:for-item="option" 
+                        wx:key="{{option.userId}}">
+                        <player simple player="{{option}}" alive="{{option.alive}}"></player>
+                    </view>
                 </view>
-            </view>
-            <view class='viewmode voter-name'>{{name}}结果</view>
-            <view class="options viewmode right">
-                <view 
-                    class="option"
-                    wx:for="{{options}}" 
-                    wx:for-item="option" 
-                    wx:key="{{option.userId}}">
-                    <player simple player="{{option}}" alive="{{option.alive}}"></player>
-                    <view wx:if="{{count[option.userId]>0}}" class="count">{{count[option.userId]}}</view>
+                <view class='viewmode voter-name'>{{name}}结果</view>
+                <view class="options viewmode right">
+                    <view 
+                        id="to_{{option.userId}}"
+                        class="option"
+                        wx:for="{{options}}" 
+                        wx:for-item="option" 
+                        wx:key="{{option.userId}}">
+                        <player simple player="{{option}}" alive="{{option.alive}}"></player>
+                        <view wx:if="{{count[option.userId]>0}}" class="count">{{count[option.userId]}}</view>
+                    </view>
                 </view>
+                <canvas class='vote-routes' canvas-id="voteroutes"></canvas>
             </view>
         </scroll-view>
         <view wx:if="{{isHost}}" class="btn btn-danger confirm" bindtap="closeVote">关闭投票</view>
         <view wx:else class="btn btn-danger confirm" bindtap="hideVote">关闭投票器</view>
     </view>
 
-    <!-- 普通模式 -->
+    <!-- 投票模式 -->
     <view wx:else class='frame'>
         <game-canvas blur scale/>
         <scroll-view scroll-y class='box {{shake? "shake": ""}}'>

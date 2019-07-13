@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "swipe-cell": "../../swipe-cell/index",
+        "cell-group": "../../cell/cell-group/index"
+    }
+}

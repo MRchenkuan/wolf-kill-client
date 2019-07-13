@@ -1,0 +1,46 @@
+<view class="page shop-cart-card-page hanzo-page">
+
+    <view class="cart-header">
+        <view>
+            <text style="margin-right: 20rpx" bind:tap="onSubmit">提交</text>
+            <text style="margin-right: 20rpx" bind:tap="onSelectAll">全选</text>
+            <text style="margin-right: 20rpx">合计总价:{{totalPrice}}</text>
+            <text bind:tap="onSwitchEdit">{{editStatus?"完成":"编辑"}}</text>
+        </view>
+    </view>
+
+    <!--scroll-view 中嵌套input Android会卡顿坑 -->
+
+    <view class="shop-scroll-wrap">
+        <block wx:for="{{list}}" wx:for-index="index" wx:key="index">
+            <hanzo-cart-card
+                    id='{{index}}'
+                    key="{{item.key}}"
+                    checked="{{item.checked}}"
+                    disabled="{{item.disabled}}"
+                    status="{{item.status}}"
+                    title="{{item.title}}"
+                    cover="{{item.cover}}"
+                    vendor="{{item.vendor}}"
+                    info="{{item.info}}"
+                    tag="{{item.tag}}"
+                    price="{{item.price}}"
+                    market-price="{{item.marketPrice}}"
+                    cart-count="{{item.cartCount}}"
+                    swipe-right-width="65"
+                    bind:onTap="onTap"
+                    bind:check="onCheck"
+                    bind:add="onAdd"
+                    bind:reduce="onReduce"
+                    bind:change="onChange"
+                    bind:blur="onBlur"
+                    bind:focus="onFocus"
+                    bind:swipeRight="onDel"
+            ><text>{{item.cell}}</text></hanzo-cart-card>
+        </block>
+    </view>
+
+    <view class="cart-footer">
+        <!--todo 结算栏组件-->
+    </view>
+</view>

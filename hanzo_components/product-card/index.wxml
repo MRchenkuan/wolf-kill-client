@@ -1,0 +1,35 @@
+<import src="./templates/buyer.wxml" />
+<import src="./templates/buy-rule.wxml" />
+<import src="./templates/buy-button.wxml" />
+<import src="./templates/card-title.wxml" />
+<import src="./templates/card-cover.wxml" />
+<import src="./templates/card-price.wxml" />
+<import src="./templates/card-vendor.wxml" />
+
+<view wx:if="{{skeleton}}" class='skeleton'>
+    <view class='view cover'></view>
+    <view class='view title'></view>
+    <view class='view sub-title'></view>
+    <view class='view line'></view>
+    <view class='view line'></view>
+    <view class='view bottom'></view>
+</view>
+
+<!-- 商品卡片 -->
+<view wx:else class="hanzo-product-card">
+    <!--普通商品品牌信息-->
+    <template wx:if="{{vendor && type!=='FRESH_HOUSE' && type!=='FRESH_ENTRY'}}" is="card-vendor" data="{{ vendor }}" />
+    <!--商品封面图-->
+    <template is="card-cover" data="{{...{video, cover, status, type, playStatus, showFullscreenBtn, timeUpdate, aimateConfig, startAimate, isTouch, isPraised, viewNum, likeNum} }}"/>
+    <!--商品标题-->
+    <template is="card-title" data="{{...{follows, title,status,type} }}"/>
+    <!--购买规则-->
+    <template is="buy-rule" data="{{...{preSaleDate, pickUpDate, saled, totle, saledTotle, limit,type} }}"/>
+    <!-- 价格标签和购买按钮 -->
+    <view class="price-and-buy row">
+        <template is="card-price" data="{{...{price, marketPrice} }}"/>
+        <template is="buy-button" data="{{...{cartCount, status, statusText, type} }}"/>
+    </view>
+    <!--购买此商品的消费者-->
+    <template wx:if="{{buyer.length>0}}" is="buyer" data="{{buyer}}" />
+</view>

@@ -1,0 +1,52 @@
+<import src="card-video.wxml" />
+<template name="card-cover">
+    <view class="product-cover {{( type==='FRESH_HOUSE' || type==='FRESH_ENTRY' ) ? 'fresh-house': ''}}" data-src="{{ cover }}" catchtap="onCoverClick" bindlongpress="onCoverPress">
+        <!--视频播放标记-->
+        <view wx:if="{{playStatus == 1 && video && type!=='FRESH_ENTRY' && status != 'SOLDOUT'}}" class="video-play-button" data-video-url="{{video}}"
+            catchtap="onPlayerClick">
+            <view class="video-player-icon"></view>
+        </view>
+        <hanzo-image style="display: {{!video || playStatus <= 1 ? '' : 'none'}};" 
+            src="{{cover}}" 
+            class="cover" 
+            mode="aspectFill" />
+        <video wx:if="{{video && (playStatus > 1 || videoCacheState)}}" 
+            style="display: {{playStatus == 1 ? 'none' : ''}};"
+            id="videoProduct" 
+            autoplay="true"
+            catchtap 
+            bindplay="videoPlay"
+            bindpause="videoPause" 
+            bindended="videoEnded" 
+            class="video" 
+            src="{{video}}" 
+            show-fullscreen-btn="{{!showFullscreenBtn}}"
+            bindtimeupdate="playTimeUpdate"
+            bindfullscreenchange="videoFullscreenchange">
+        </video>
+		<view wx:if="{{video && (playStatus > 1 || videoCacheState)}}" class="playTimes">
+        	<view class="playTimesText">播放次数: {{viewNum}}</view>
+		</view>
+		<view wx:if="{{video && (playStatus > 1 || videoCacheState)}}" class="givelike {{ isTouch ? 'praiseScale': '' }}" bindtap="giveaLike">
+			<icon type="aixin" size="58rpx" color="{{isPraised?'red':'white'}}" />
+		</view>
+		<view class="likeNum likeNumItem" wx:if="{{video && (playStatus > 1 || videoCacheState) && isPraised }}">{{likeNum}}</view>
+		<view class="popotext" wx:if="{{video && (playStatus > 1 || videoCacheState) && !isPraised }}">点赞</view>
+		<view wx:if="{{video && (playStatus > 1 || videoCacheState)}}" class="lovesbox">
+			<icon 
+				type="aixin" 
+				size="48rpx" 
+				wx:for="{{aimateConfig}}" 
+				wx:for-index="{{index}}" 
+				wx:key="index" 
+				color="{{item.color}}" 
+				class="aimateloves {{startAimate? 'paopao':''}}" 
+				style="animation-delay: {{item.time}}; left: {{item.left}};top:{{item.top}}"
+			/>
+		</view>
+        <image src="../images/fullScreen.png" wx:if="{{video && showFullscreenBtn && playStatus > 1}}" class="btnFullScreen" src="images/fullScreen.png" catchtap="playNewPageFullscreen" />
+        <!--已售完/库存不足-->
+        <view class="cover-mask soldout" wx:if="{{status === 'SOLDOUT'}}">抢光了</view>
+        <view class="cover-mask lack" wx:if="{{status === 'LACK'}}">库存不足</view>
+    </view>
+</template>

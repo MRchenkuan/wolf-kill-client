@@ -1,0 +1,10 @@
+<dialog modal>
+    <view slot="content">
+        <view bindtap="mark" data-role='Wolf'>狼人</view>
+        <view bindtap="mark" data-role='Sale'>好人</view>
+        <view bindtap="mark" data-role='Unknow'>好人</view>
+    </view>
+    <view slot="options">
+        <view class='btn btn-warn' bindtap>取消</view>
+    </view>
+</dialog>

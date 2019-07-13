@@ -1,0 +1,9 @@
+<popup show="{{show}}" >
+	<view>
+		Dialog
+	</view>
+	<view>
+		咋就不清晰呢
+	</view>
+	<button bindtap="click">确定</button>
+</popup>

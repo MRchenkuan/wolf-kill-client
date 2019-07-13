@@ -1,0 +1,7 @@
+<!--hanzo_components/brand-empty/index.wxml-->
+<empty img="./brand-empty/static/{{type}}.png">
+	<view>
+		<view class="hanzo-brand-empty-title">{{title}}</view>
+		<view class="hanzo-brand-empty-desc">{{desc}}</view>
+	</view>
+</empty>

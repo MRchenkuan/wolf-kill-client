@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "button 演示",
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black",
+        
+  "usingComponents": {
+    "h-button": "/hanzo_components/button/index"
+  }
+}

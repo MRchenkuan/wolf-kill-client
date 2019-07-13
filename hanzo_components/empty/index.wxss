@@ -1,0 +1,21 @@
+/* hanzo_components/empty/index.wxss */
+.hanzo-empty {
+  height: 100%;
+  text-align: center;
+}
+.hanzo-empty-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #808080;
+}
+.hanzo-empty-image {
+  margin: 79rpx auto 0 auto;
+}
+.hanzo-empty-image .image {
+  width: 404rpx;
+  height: 239rpx;
+}
+.hanzo-empty-icon {
+  margin-top: 150rpx;
+}

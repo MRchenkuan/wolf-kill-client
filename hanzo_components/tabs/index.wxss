@@ -1,0 +1,116 @@
+.van-tabs {
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.van-tabs__wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  background-color: #fff;
+}
+.van-tabs__wrap--page-top {
+  position: fixed;
+}
+.van-tabs__wrap--content-bottom {
+  top: auto;
+  bottom: 0;
+}
+.van-tabs__wrap--scrollable .van-tab {
+  flex: 0 0 22%;
+}
+.van-tabs__scroll--card {
+  border: 1rpx solid #f44;
+  border-radius: 2rpx;
+}
+.van-tabs__nav {
+  position: relative;
+  display: flex;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.van-tabs__nav--line {
+  height: 100%;
+}
+.van-tabs__nav--card {
+  height: 30rpx;
+}
+.van-tabs__nav--card .van-tab {
+  line-height: 30rpx;
+  color: #f44;
+  border-right: 1rpx solid #f44;
+}
+.van-tabs__nav--card .van-tab:last-child {
+  border-right: none;
+}
+.van-tabs__nav--card .van-tab.van-tab--active {
+  color: #fff;
+  background-color: #f44;
+}
+.van-tabs__line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 3rpx;
+  background-color: #f44;
+  border-radius: 3rpx;
+}
+.van-tabs--line {
+  padding-top: 44rpx;
+}
+.van-tabs--line .van-tabs__wrap {
+  height: 44rpx;
+}
+.van-tabs--card {
+  padding-top: 30rpx;
+  margin: 0 15rpx;
+}
+.van-tabs--card .van-tabs__wrap {
+  height: 30rpx;
+}
+.van-tabs__content {
+  overflow: hidden;
+}
+.van-tabs__track {
+  position: relative;
+}
+.van-tab {
+  position: relative;
+  min-width: 0;
+  /* hack for flex ellipsis */
+  padding: 0 5rpx;
+  font-size: 14rpx;
+  line-height: 44rpx;
+  color: #7d7e80;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  flex: 1;
+}
+.van-tab--active {
+  font-weight: 500;
+  color: #555555;
+}
+.van-tab--disabled {
+  color: #c9c9c9;
+}
+.van-tab__title--dot::after {
+  display: inline-block;
+  width: 8rpx;
+  height: 8rpx;
+  vertical-align: middle;
+  background-color: #f44;
+  border-radius: 100%;
+  content: '';
+}
+.van-tab__title__info {
+  position: relative !important;
+  top: -1rpx !important;
+  display: inline-block;
+  -webkit-transform: translateX(0) !important;
+          transform: translateX(0) !important;
+}

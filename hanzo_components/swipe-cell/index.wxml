@@ -1,0 +1,24 @@
+<wxs src="./swipeCell.wxs" module="tools" />
+
+<view
+        class="hanzo-swipe-cell"
+        data-key="cell"
+        bindtap="onClick"
+        bindtouchstart="startDrag"
+        bindtouchmove="onDrag"
+        bindtouchend="endDrag"
+        bindtouchcancel="endDrag"
+>
+    <view
+            style="{{ tools.wrapperStyle(offset, dragIng) }}"
+            bindtransitionend="onTransitionend"
+    >
+        <view wx:if="{{ leftWidth }}" class="hanzo-swipe-cell__left" data-key="left" catch:tap="onClick">
+            <slot name="left" />
+        </view>
+        <slot />
+        <view wx:if="{{ rightWidth }}" class="hanzo-swipe-cell__right" data-key="right" catch:tap="onClick">
+            <slot name="right" />
+        </view>
+    </view>
+</view>

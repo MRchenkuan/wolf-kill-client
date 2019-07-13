@@ -1,0 +1,3 @@
+<view class='hanzo-alert' catchtap='onTap'>
+    <view>{{message}}</view>
+</view>

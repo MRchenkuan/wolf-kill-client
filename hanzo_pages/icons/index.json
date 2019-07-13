@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "icons 演示",
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black",
+        
+  "usingComponents": {
+    "hanzo-icon": "/hanzo_components/icon/index"
+  }
+}

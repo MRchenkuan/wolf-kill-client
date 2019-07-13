@@ -96,3 +96,14 @@ page::before{
     text-align: center;
     margin-top: 40rpx;
 }
+.share-desc{
+    color: #6e5a34;
+    text-shadow: 1px 1px 1px #fdf1db;
+    font-size: 28rpx;
+    margin: 20rpx 20rpx;
+}
+.btn-share{
+    color: #fff;
+    margin: 40rpx 20rpx;
+    background: linear-gradient(to bottom right, #8BC34A, #4CAF50);
+}

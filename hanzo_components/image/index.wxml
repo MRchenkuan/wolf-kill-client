@@ -1,0 +1,9 @@
+<view data-src="{{ src }}" class="hanzo-image">
+    <image wx:if="{{src}}"
+           class="image"
+        src="{{src}}"
+        lazy-load="{{lazyLoad}}"
+        bindload="handleload"
+        binderror="handleerror"
+        mode="{{mode}}"/>
+</view>

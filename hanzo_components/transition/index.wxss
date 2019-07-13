@@ -1,0 +1,79 @@
+.hanzo-transition {
+  transition-timing-function: ease;
+}
+.hanzo-fade-enter-active,
+.hanzo-fade-leave-active {
+  transition-property: opacity;
+}
+.hanzo-fade-enter,
+.hanzo-fade-leave-to {
+  opacity: 0;
+}
+.hanzo-fade-up-enter-active,
+.hanzo-fade-up-leave-active,
+.hanzo-fade-down-enter-active,
+.hanzo-fade-down-leave-active,
+.hanzo-fade-left-enter-active,
+.hanzo-fade-left-leave-active,
+.hanzo-fade-right-enter-active,
+.hanzo-fade-right-leave-active {
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
+}
+.hanzo-fade-up-enter,
+.hanzo-fade-up-leave-to {
+  opacity: 0;
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
+}
+.hanzo-fade-down-enter,
+.hanzo-fade-down-leave-to {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
+}
+.hanzo-fade-left-enter,
+.hanzo-fade-left-leave-to {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+}
+.hanzo-fade-right-enter,
+.hanzo-fade-right-leave-to {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+.hanzo-slide-up-enter-active,
+.hanzo-slide-up-leave-active,
+.hanzo-slide-down-enter-active,
+.hanzo-slide-down-leave-active,
+.hanzo-slide-left-enter-active,
+.hanzo-slide-left-leave-active,
+.hanzo-slide-right-enter-active,
+.hanzo-slide-right-leave-active {
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+}
+.hanzo-slide-up-enter,
+.hanzo-slide-up-leave-to {
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
+}
+.hanzo-slide-down-enter,
+.hanzo-slide-down-leave-to {
+  -webkit-transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
+}
+.hanzo-slide-left-enter,
+.hanzo-slide-left-leave-to {
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+}
+.hanzo-slide-right-enter,
+.hanzo-slide-right-leave-to {
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}

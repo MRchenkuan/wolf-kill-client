@@ -1,0 +1,9 @@
+/* hanzo_components/brand-empty/index.wxss */
+.hanzo-brand-empty-title {
+  font-size: 28rpx;
+  line-height: 60rpx;
+}
+.hanzo-brand-empty-desc {
+  font-size: 24rpx;
+  color: #909090;
+}

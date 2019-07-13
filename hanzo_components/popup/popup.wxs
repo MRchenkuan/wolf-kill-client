@@ -1,0 +1,31 @@
+/**
+ * position 对应css style属性值
+ * @param position
+ */
+function getPosCss(position){
+    var cssStyle = '';
+    switch (position) {
+        case 'top':
+            cssStyle = 'right:auto;left:auto;top: 0;bottom: auto;width:100%;';
+            break;
+        case 'bottom':
+            cssStyle = 'right:auto;left:auto;top: auto;bottom: 0;width:100%;';
+            break;
+        case 'left':
+            cssStyle = 'right:auto;left:0;top: 50%;bottom: auto;';
+            break;
+        case 'right':
+            cssStyle = 'right:0;left:auto;top: 50%;bottom: auto;';
+            break;
+        case 'center':
+            cssStyle = 'transform: translate3d(-50%, -50%, 0);top: 50%;left: 50%;';
+            break;
+        default:
+            cssStyle = 'transform: translate3d(-50%, -50%, 0);top: 50%;left: 50%;';
+    }
+    return cssStyle
+}
+
+module.exports = {
+    getPosCss:getPosCss
+};

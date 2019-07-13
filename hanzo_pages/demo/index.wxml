@@ -1,0 +1,1 @@
+ <shop-empty title="暂无商品" btn-text="按钮文字" bind:btn-click="gotoshop"/>

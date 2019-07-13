@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "hanzo组件库示例",
+        "navigationStyle": "default",
+            "navigationBarTextStyle": "black",
+            
+  "usingComponents": {
+    "h-cell": "/hanzo_components/cell/index",
+    "h-cell-group": "/hanzo_components/cell/cell-group/index",
+    "h-button": "/hanzo_components/button/index"
+  }
+}

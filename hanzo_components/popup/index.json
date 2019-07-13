@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "overlay": "../overlay/index",
+        "transition": "../transition/index"
+    }
+}

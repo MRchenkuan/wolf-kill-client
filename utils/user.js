@@ -14,11 +14,13 @@ export function getOpenId(){
                     resolve(data);
                 })).catch(e=>{
                     rej(e)
+                    console.log(e)
                 })
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
             },
             fail(e){
                 rej(e);
+                console.log(e)
             }
         })
     })

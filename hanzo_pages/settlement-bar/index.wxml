@@ -1,0 +1,24 @@
+<view class="hanzon-settlement-bar hanzo-page">
+    <view class='operation'>
+      <button bindtap="changMode">{{mode=="normal" ? "删除" : "正常"}}模式</button>
+      <button bindtap="changDisabled">{{disabled?"允许":"禁止"}}全选</button>
+    </view>
+
+    <settlement-bar 
+      count="{{count}}" 
+      checked="{{checked}}" 
+      amount="{{amount}}"
+      disabled="{{disabled}}"
+      mode = "{{mode}}"
+      bind:checked="onChecked"
+      bind:submit="onSubmit"
+      bind:del="onDel" />
+
+      <em class="status">当前模式：{{mode}}</em>
+      <em class="status">禁用状态：{{disabled}}</em>
+      <em class="status">事件状态：{{status}}</em>
+
+      <em class="status red">注意：</em>
+      <em class="status red">1、合计总价、合计数量任意属性为0时不会触发结算事件。</em>
+      <em class="status red">2、合计数量属性为0时不会触发删除事件。</em>
+</view>

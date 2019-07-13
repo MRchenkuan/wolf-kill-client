@@ -1,0 +1,13 @@
+<view class="">
+  <view
+    class="van-tabs__content"
+    bind:touchstart="onTouchStart"
+    bind:touchmove="onTouchMove"
+    bind:touchend="onTouchEnd"
+    bind:touchcancel="onTouchEnd"
+  >
+    <view class="van-tabs__track" style="{{ trackStyle }}">
+      <slot />
+    </view>
+  </view>
+</view>

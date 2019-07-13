@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "switch 演示",
+        "navigationStyle": "default",
+"navigationBarTextStyle": "black",
+"usingComponents": {
+    "hanzo-switch": "/hanzo_components/switch/index",
+    "hanzo-loading": "/hanzo_components/loading/index",
+    "hanzo-swipe-cell": "/hanzo_components/swipe-cell/index",
+    "hanzo-swipe-cell-row": "/hanzo_components/swipe-cell/swipe-cell-row/index",
+    "hanzo-cell": "/hanzo_components/cell/index",
+    "hanzo-cell-group": "/hanzo_components/cell/cell-group/index"
+  }
+}

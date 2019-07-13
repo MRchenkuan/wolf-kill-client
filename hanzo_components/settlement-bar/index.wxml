@@ -1,0 +1,18 @@
+<view class='hanzo-settlement-bar'>
+  <view class='left'>
+    <view class="checked-radio {{checked?'checked':''}} {{disabled?'disabled':''}}" catchtap="onChecked">
+      <icon wx:if="{{checked}}" type="success" size="20rpx" color="#fff" />
+    </view>
+    全选
+  </view>
+
+  <view class='sumMoney'>
+    <em>合计:</em>
+    <em>￥{{amount}}</em>
+  </view>
+
+  <view class='right'>
+    <view wx:if="{{mode== 'normal'}}" class="balance {{count==0 ? 'not-select':''}}" catchtap="onSubmit">去结算({{count}})</view>
+    <view wx:else class="delete" catchtap="onDel">删除({{count}})</view>
+  </view>
+</view>

@@ -1,0 +1,24 @@
+<view class="swipe-cell-row">
+    <swipe-cell right-width="{{ swipeRightWidth }}" left-width="{{swipeLeftWidth}}">
+
+        <block wx:if="{{swipeLeftText}}" >
+            <view slot="left" class="swipe-cell-left" bindtap="onSwipeLeft">
+                <view class="swipe-cell-text">
+                    <text>{{swipeLeftText}}</text>
+                </view>
+            </view>
+        </block>
+
+        <cell-group>
+            <slot />
+        </cell-group>
+
+        <block wx:if="{{swipeRightText}}" >
+            <view slot="right" class="swipe-cell-right" bindtap="onSwipeRight">
+                <view class="swipe-cell-text">
+                    <text>{{swipeRightText}}</text>
+                </view>
+            </view>
+        </block>
+    </swipe-cell>
+</view>

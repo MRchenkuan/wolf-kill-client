@@ -1,0 +1,35 @@
+
+.searchBand{height: 96rpx;background: #fff;z-index: 4;top:0}
+.searchBand .main{margin: 22rpx auto 0 auto;width: 710rpx}
+.searchBand .main .l{ background:#E9EDF1;width: 618rpx; height: 65rpx;border-radius: 38rpx;position: relative;}
+.searchBand .main .l .searchIcon{position:absolute;left:15rpx; top: 16rpx; display: block; color: #868691;}
+.searchBand .main .l input{position: absolute;left: 55rpx;top: 0; height: 64rpx; line-height: 65rpx;font-size: 26rpx;color: #444;width: 500rpx}
+.searchBand .main .buttons{width: 70rpx;text-align: center;padding: 0;height: 64rpx; line-height: 64rpx;background: none;border: none 0;font-size: 28rpx;color: #404040;}
+.searchBand .main .buttons .shopcard {
+	width: 56rpx;
+    height: 56rpx;
+    position: fixed;
+    right: 22rpx;
+    top: 5rpx;
+    padding: 20rpx;
+}
+.searchBand .main .buttons .footer {
+	height:24rpx;
+    min-width: 8rpx;
+    line-height: 24rpx;
+    background:rgba(255,255,255,1);
+    border-radius: 24rpx;
+    border: 1px solid rgba(230,0,18,1);
+    padding-left: 8rpx;
+    padding-right: 8rpx;
+
+    font-size: 20rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(230,0,18,1);
+    position: fixed;
+    top: 22rpx;
+    right: 30rpx;
+}
+.fixed{position:fixed;-webkit-overflow-scrolling : touch; width:750rpx;left:0%; overflow:scroll;}
+.flex{ display: -webkit-box; display: -moz-box;  display: -webkit-flex; display: flex;flex-wrap:nowrap;-webkit-flex-direction: row; flex-direction:row;-webkit-justify-content: space-between;  justify-content:space-between;-webkit-align-items: center;align-items:center; }

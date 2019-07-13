@@ -1,0 +1,8 @@
+{
+    "component": true,
+    "usingComponents": {
+        "cart-counter": "../counter/index",
+        "hanzo-image": "../image/index",
+        "icon": "../icon/index"
+    }
+}

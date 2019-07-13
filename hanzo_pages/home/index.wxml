@@ -1,0 +1,14 @@
+<view class="page-home hanzo-page">
+    <h-cell-group>
+        <block wx:for="{{ list }}" wx:for-item="group" wx:key="group.title">
+            <view class="list-item">
+                <h-cell
+                        title="{{group.title}}"
+                        value="{{group.content}}"
+                        is-link
+                        url="/hanzo_pages/{{group.path}}/index"
+                />
+            </view>
+        </block>
+    </h-cell-group>
+</view>

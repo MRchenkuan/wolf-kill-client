@@ -1,0 +1,5 @@
+<template name="card-vendor">
+    <view class="vendor-name">
+        本商品由{{ vendor }}专供
+    </view>
+</template>

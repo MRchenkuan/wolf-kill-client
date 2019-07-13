@@ -1,0 +1,16 @@
+<view class='hanzo-page'>
+
+ <h-button type="warn" inline="true">一个警告按钮</h-button>
+ <h-button inline="true">一个强化样式按钮</h-button>
+
+ <h-button>全宽按钮</h-button>
+ <h-button type="outline">弱化样式</h-button>
+
+ <h-button disabled>禁用</h-button>
+
+ <h-button type="info">信息按钮</h-button>
+
+ <h-button type="success" shape="square">成功</h-button>
+ <h-button type="error">错误</h-button>
+ <h-button loading>加载中...</h-button>
+</view>

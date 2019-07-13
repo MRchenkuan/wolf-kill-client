@@ -1,0 +1,27 @@
+/* hanzo_components/shop-hanzo-counter/shop-hanzo-counter.wxss */
+.hanzo-counter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.hanzo-counter .options {
+  color: #e60012;
+  text-align: center;
+}
+.hanzo-counter .options.disabled {
+  pointer-events: none;
+  color: #999999;
+}
+.hanzo-counter .input {
+  width: 120rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  display: block;
+  outline: none;
+  text-align: center;
+  font-size: 44rpx;
+  color: #555555;
+}
+.hanzo-counter .input.edit {
+  width: 80rpx;
+}

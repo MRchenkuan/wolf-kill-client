@@ -29,6 +29,7 @@ Page({
         isVoted: false, // 是否已投票
         voter: {}, // 当前的投票
         markerVisiable: false, // 身份标记器是否可见
+        shareVisiable: false, // 分享弹窗
     },
     ...openidBehavior.member,
     ...authorizeBehavior.member,
@@ -74,15 +75,19 @@ Page({
             showToast('用户id 获取失败')
         })
     },
-
+    goOut(){
+        wx.navigateTo({
+            url: '/pages/create/index',
+        })
+    },
     /**
      * 开始游戏
      */
     startGame(){
         const { seats, players, roleMap} = this.data;
         const roleCount = Object.values(roleMap).reduce((a, b) => a + b.count, 0);
-        if(seats!==players.length) return showToast('玩家数与座位数不匹配，请调整座位');
-        if (roleCount > seats) return showToast('角色牌过多');
+        if(seats!==players.length) return showToast('座位未坐满，请调整座位或邀请玩家加入');
+        // if (roleCount > seats) return showToast('角色牌过多');
         if (roleCount < seats) return showToast('角色牌太少');
         getOpenId().then(userId => {
             api.startGame({ userId, tableId: this.tableId }).then(table=>{
@@ -287,13 +292,54 @@ Page({
      * 连接服务器
      */
     connect({ userId, tableId }){
-        // 建立服务器连接
-        this.wss = wsCommon.connect({ userId, tableId });
-        // 监听服务端消息
+        if(!this.wss){
+            // 建立服务器连接
+            this.wss = wsCommon.connect({ userId, tableId });
+            // 监听服务端消息
+            this.wss.onMessage((message) => {
+                const { name, data } = JSON.parse(message.data);
+                this.eventRouter(name, data);
+            });
+            this.wss.onClose(() => {
+                this.wss = null
+            })
+            this.wss.onError(()=>{
+                this.wss = null
+                wx.closeSocket();
+            })
+            // 开始心跳
+            this.beat();
+        }
+    },
+    /**
+     * 心跳
+     */
+    beat(){
+        const duration = 10 * 1000;
+        let timer = null;
+        let pong = false;
+        const ping = ()=>{
+            pong = false;
+            this.wss.wx.sendSocketMessage({
+                data: "ping",
+            });
+        }
+
         this.wss.onMessage((message) => {
-            const { name, data } = JSON.parse(message.data);
-            this.eventRouter(name, data);
+            // 接受心跳，如果收到了，则重置计时器，否则重连
+            if (message === 'pong'){
+                pong = true;
+                clearTimeout(timer);
+                setTimeout(ping, duration);
+            } 
         });
+        timer = setTimeout(()=>{
+            if(!pong) {
+                this.connect({ userId, tableId: this.tableId })
+            } else {
+                pong = false;
+            }
+        }, duration)
     },
     /**
      * 创建一个投票
@@ -343,6 +389,22 @@ Page({
         
     },
     /**
+     * 打开分享
+     */
+    showShare({ detail }){
+        this.setData({
+            shareVisiable: true,
+        })
+    },
+    /**
+     * 隐藏分享
+     */
+    hideShare(){
+        this.setData({
+            shareVisiable: false,
+        })
+    },
+    /**
      * 隐藏标记器
      */
     hideMarker(){
@@ -374,7 +436,7 @@ Page({
             getOpenId().then(userId => {
                 api.updateTable({
                     key: 'seats',
-                    data: value,
+                    data: Math.max(value, 1),
                     userId,
                     tableId: this.tableId
                 }).then((table) => {
@@ -393,6 +455,12 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        this.setData({
+            shareVisiable: false,
+        })
+        return {
+            title: `「${app.globalData.userInfo.nickName}」邀请你加入他的的游戏房间`,
+            path:`/pages/ready/index?tableId=${this.tableId}`
+        }
     }
 })

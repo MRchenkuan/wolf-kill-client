@@ -1,0 +1,39 @@
+.hanzo-panel {
+  position: relative;
+  overflow: hidden;
+}
+.hanzo-panel-title {
+  font-size: 28rpx;
+  line-height: 1;
+  color: #323233;
+  padding: 20rpx 16rpx 10rpx;
+}
+.hanzo-panel-title-hide-top {
+  padding-top: 0;
+}
+.hanzo-panel-content {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+}
+.hanzo-panel-content::after {
+  content: ' ';
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  /* cover wechat button:after default transforn-origin */
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+  border: 0 solid #eee;
+  border-top-width: 1rpx;
+  border-bottom-width: 1rpx;
+}
+.hanzo-panel-without-border::after {
+  border: 0 none;
+}

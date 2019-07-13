@@ -1,0 +1,10 @@
+<!--hanzo_components/derive-empty/business-empty/index.wxml-->
+<empty img="./business-empty/static/cup.png" width="233rpx" height="233rpx">
+	<view>
+		<view class="hanzo-business-empty-tips">{{title}}</view>
+		<view wx-if="{{displaytime}}" class="hanzo-business-empty-tag">
+			<text>{{displaytime}}</text>
+		</view>
+		<view class="hanzo-business-empty-desc">{{desc}}</view>
+	</view>
+</empty>

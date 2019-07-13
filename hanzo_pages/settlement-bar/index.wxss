@@ -1,0 +1,27 @@
+.hanzon-settlement-bar{
+  font-size: 26rpx;
+  color: #999;
+}
+.hanzon-settlement-bar .status{
+  padding: 15rpx 0 0 10rpx;
+  display: block;
+}
+.operation:after{
+   content: " "; 
+   display: block; 
+   height: 0; 
+   clear: both; 
+   visibility: hidden;  
+ } 
+.operation button{
+  margin: 10rpx 5rpx 15rpx 5rpx;
+  width: 200rpx;
+  text-align: center;
+  font-size: 30rpx;
+  background: #f00;
+  color: #fff;
+  float: left;
+}
+.red{
+  color: #f00;
+}

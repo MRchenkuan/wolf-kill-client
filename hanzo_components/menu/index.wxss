@@ -1,0 +1,89 @@
+.menu__scroll {
+  padding: 20rpx 30rpx 0rpx;
+  font-size: 28rpx;
+  color: #9b9b9b;
+  position: relative;
+}
+.menu__list {
+  white-space: nowrap;
+  width: 100%;
+}
+.menu__list .menu__item {
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 40rpx;
+  font-size: 28rpx;
+  padding-top: 10rpx;
+  padding-bottom: 5rpx;
+  padding-left: 5rpx;
+  padding-right: 5rpx;
+}
+.menu__list .menu__item:last-child {
+  margin-right: 0;
+}
+.menu__line__vertical {
+  width: 6rpx;
+  height: 30rpx;
+  background: #f44;
+  border-radius: 6rpx;
+  position: absolute;
+  top: 0;
+  left:0;
+}
+
+.menu__list__vertical {
+	display: inline-block;
+    width: auto;
+    white-space: nowrap;
+	height: 100%;
+}
+
+.menu__list__vertical .menu__item{
+	white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	position: relative;
+    -webkit-flex: 1;
+    flex: 1;
+  	font-size: 28rpx;
+    text-overflow: ellipsis;
+	overflow: visible;
+	background: #F5F7FA;
+	height: 80rpx;
+	width: 164rpx;
+}
+
+.menu__vertical {
+    display: flex;
+    flex: 1;
+	position: relative;
+  	color: #9b9b9b;
+}
+
+.menu__vertical .menu__scroll-wrapper {
+  	height: 100%;
+}
+
+.menu__vertical .menu__scroll {
+  padding: 0;
+}
+.scroll-view__vertical {
+  	height: 100%;
+}
+
+.menu__item.active {
+  	color: #383538;
+	background: #fff;
+}
+
+.menu__line {
+  width: 56rpx;
+  height: 6rpx;
+  background: #f44;
+  border-radius: 6rpx;
+}
+
+.transition {
+  transition: all 0.3s ease 0s;
+}

@@ -1,0 +1,17 @@
+/* hanzo_components/shop-empty/index.wxss */
+.hanzo-shop-empty-desc {
+  line-height: 32rpx;
+  font-size: 34rpx;
+}
+.hanzo-shop-empty-btn {
+  width: 200rpx;
+  height: 66rpx;
+  font-size: 28rpx;
+  line-height: 64rpx;
+  border-radius: 33rpx;
+  border: 1rpx solid #E60012;
+  color: #E60012;
+  background-color: transparent;
+  margin: 60rpx auto;
+  padding: auto;
+}

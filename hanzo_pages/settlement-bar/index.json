@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "settlement-bar 演示",
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black",
+        
+  "usingComponents": {
+    "settlement-bar": "/hanzo_components/settlement-bar/index"
+  }
+}

@@ -1,0 +1,15 @@
+<view class="{{ align === 'horizontal' ? 'menu' : 'menu__vertical' }}" style="height:{{height}}">
+	<view class="menu__scroll">
+		<view class="menu__scroll-wrapper">
+			<scroll-view class="{{ align === 'horizontal' ? 'scroll-view' : 'scroll-view__vertical' }}" scroll-x="{{ align === 'horizontal'}}" scroll-y="{{ align === 'vertical'}}" scroll-with-animation="{{true}}" scroll-left="{{scrollLeft}}" scroll-top="{{scrollTop}}">
+				<view class="{{ align === 'horizontal' ? 'menu__list' : 'menu__list__vertical' }}">
+					<view class="menu__item {{index===0?'first':''}} {{index===tab.length-1?'last':''}} {{item.active?'active':''}}" wx:for="{{menuInfo}}" wx:key="{{index}}" bindtap="changeTab" data-index="{{index}}" data-left="{{item.left}}" data-top="{{item.top}}">
+						{{item.label}}
+					</view>
+				</view>
+				<view wx:if="{{ align === 'horizontal'}}" class="menu__line transition" style="width:{{width}}px; margin-left:{{ml}}px;"></view>
+				<view wx:if="{{ align === 'vertical'}}" class="menu__line__vertical transition" style="top:{{ml}}px;"></view>
+			</scroll-view>
+		</view>
+	</view>
+</view>

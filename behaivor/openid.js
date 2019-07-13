@@ -1,3 +1,5 @@
+import { getOpenId, showToast } from "../utils/index.js";
+
 export default {
     data: {
         openid: wx.getStorageInfoSync('openid'),

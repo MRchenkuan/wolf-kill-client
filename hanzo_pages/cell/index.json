@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "cell 演示",
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black",        
+  "usingComponents": {
+    "h-cell": "/hanzo_components/cell/index",
+    "h-cell-group": "/hanzo_components/cell/cell-group/index",
+    "h-panel": "/hanzo_components/panel/index",
+    "h-icon": "/hanzo_components/icon/index"
+  }
+}

@@ -1,0 +1,25 @@
+/* hanzo_components/derive-empty/business-empty/index.wxss */
+.hanzo-business-empty-tips {
+  font-size: 30rpx;
+  color: #909090;
+  margin-bottom: 19rpx;
+}
+.hanzo-business-empty-tag {
+  background: #29a529;
+  text-align: center;
+  color: #fff;
+  border-radius: 38rpx;
+  -moz-border-radius: 38rpx;
+  -webkit-border-radius: 38rpx;
+  font-size: 35rpx;
+  margin-bottom: 19rpx;
+  padding: 14rpx 28rpx;
+}
+.hanzo-business-empty-character {
+  margin: 0 10rpx;
+}
+.hanzo-business-empty-desc {
+  font-size: 24rpx;
+  color: #909090;
+  margin-bottom: 19rpx;
+}

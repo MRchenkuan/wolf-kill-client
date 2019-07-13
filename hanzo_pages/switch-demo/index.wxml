@@ -1,0 +1,37 @@
+<view class="switch-demo-page hanzo-page">
+    <view>
+        <text>loading-demo</text>
+    </view>
+    <view>
+        <hanzo-loading>加载中...</hanzo-loading>
+    </view>
+    <viwe>
+        <hanzo-loading type="spinner" color="#1989fa" />
+    </viwe>
+    <view>
+        <text>switch-demo</text>
+    </view>
+    <view>
+        <hanzo-switch checked="{{ checked }}" bind:change="onChange"></hanzo-switch>
+    </view>
+    <view>
+        <text>swipe-cell-demo</text>
+    </view>
+    <view>
+        <hanzo-swipe-cell right-width="{{ 65 }}" left-width="{{ 65 }}">
+            <view slot="left" class="hanzo-swipe-cell__left">选择</view>
+            <hanzo-cell-group>
+                <hanzo-cell title="单元格" value="内容" ></hanzo-cell>
+            </hanzo-cell-group>
+            <view slot="right" class="hanzo-swipe-cell__right">删除</view>
+        </hanzo-swipe-cell>
+    </view>
+    <view>
+        <text>swipe-cell-row-demo</text>
+    </view>
+    <view>
+        <hanzo-swipe-cell-row>
+            <hanzo-cell title="单元格" value="内容" ></hanzo-cell>
+        </hanzo-swipe-cell-row>
+    </view>
+</view>

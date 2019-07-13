@@ -1,0 +1,3 @@
+<template name="card-price">
+    <view class="price"><big class="big">{{price}}</big><small class="small">{{marketPrice}}</small></view>
+</template>

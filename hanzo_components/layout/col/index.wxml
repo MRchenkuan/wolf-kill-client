@@ -1,0 +1,1 @@
+<view class="h-class hanzo-col {{ span ? 'hanzo-col-span-' + span : '' }} {{ offset ? 'hanzo-col-offset-' + offset : '' }}"><slot></slot></view>

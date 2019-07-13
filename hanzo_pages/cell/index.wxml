@@ -1,0 +1,17 @@
+<view class="page-cell hanzo-page">
+
+ <h-panel class="cell-panel-demo">
+  <h-cell title="单元格" label="附加描述" value="内容"></h-cell>
+ </h-panel>
+
+ <h-panel class="cell-panel-demo">
+  <h-cell title="跳转内容页" is-link value="进入"></h-cell>
+ </h-panel>
+
+ <h-panel class="cell-panel-demo" title="带 icon 的 Cell">
+  <h-cell title="单行列表" value="详细信息">
+   <h-icon type="dianzanshu" slot="icon" />
+  </h-cell>
+ </h-panel>
+
+</view>

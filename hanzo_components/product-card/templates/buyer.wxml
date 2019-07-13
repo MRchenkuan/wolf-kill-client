@@ -1,0 +1,14 @@
+<!--购买此商品的消费者-->
+
+
+
+<template name="buyer">
+    <view class="product-buyer" data-item="{{product}}" bindtap="onBuyerClick">
+        <view class="dall">
+            <image wx:for="{{buyer}}" wx:key="buyer" src="{{item}}" class="avator" />
+            <div class="more" wx:if="{{buyer.length >= 5}}" />
+            <em class="em">等购买了此商品。</em>
+        </view>
+        <icon type="jiantou" size="24rpx" color="#999999" />
+    </view>
+</template>

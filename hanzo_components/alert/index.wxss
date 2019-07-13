@@ -1,0 +1,18 @@
+/* pure-hanzo_components/alert/index.wxss */
+.hanzo-alert {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-weight: 900;
+  height: 60rpx;
+  background-color: #f90;
+  font-size: 0%;
+  white-space: nowrap;
+  line-height: 60rpx;
+  color: #fff;
+  text-align: left;
+  font-size: 14rpx;
+  text-align: center;
+}

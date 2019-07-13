@@ -1,0 +1,21 @@
+<view class="searchBand fixed">
+    <view class='main flex'>
+        <view class='l'>
+            <icon class="searchIcon" type="fangdajing" size="26rpx"></icon>
+            <input 
+				placeholder='搜索商品' 
+				maxlength='50' 
+				confirm-type="search" 
+                bindfocus='handleFocusSearch'
+                bindblur="handleSearchBlur"
+				bindconfirm="bindSearch" 
+				bindinput="searchText" 
+			/>
+        </view>
+        <view class="buttons" bindtap='bindToCart' wx:if="{{type==='cart'}}">
+			<image class="shopcard" src="http://apimagev.frxs.cn/systemFootNavImg/20190228/100percent_9309f8a3-b399-405a-866c-7c36c1d550271551323120309.png" bindtap="toCart" />
+			<text class="footer" wx:if="{{cartCount > 0}}">{{cartCount}}</text>
+		</view>
+		<view wx:else="{{type==='button'}}" class="buttons" bindtap='handlesearch'>搜索</view>
+    </view>
+</view>

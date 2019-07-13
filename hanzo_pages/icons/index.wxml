@@ -1,0 +1,5 @@
+<view class="icons-page hanzo-page">
+    <view class="cell" wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+        <hanzo-icon type="{{item.name}}" size="32px"></hanzo-icon><text>{{item.name}}</text>
+    </view>
+</view>

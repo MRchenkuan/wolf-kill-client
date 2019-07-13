@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "index 演示",
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black",
+        
+  "usingComponents": {
+    "transition": "/hanzo_components/transition/index",
+    "overlay": "/hanzo_components/overlay/index",
+    "shop-empty": "/hanzo_components/empty/shop-empty/index",
+    "h-button": "/hanzo_components/button/index"
+  }
+}

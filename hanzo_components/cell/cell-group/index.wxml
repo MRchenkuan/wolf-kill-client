@@ -1,0 +1,3 @@
+<view class="h-class hanzo-cell-group">
+    <slot></slot>
+</view>

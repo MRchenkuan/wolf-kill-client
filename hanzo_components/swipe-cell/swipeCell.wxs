@@ -1,0 +1,9 @@
+function wrapperStyle(offset, dragIng) {
+    var transform = "translate3d("+offset+"px, 0, 0)";
+    var transition = dragIng ? 'none' : '.6s cubic-bezier(0.18, 0.89, 0.32, 1)';
+    return "-webkit-transform: "+transform+";-webkit-transition:"+transition+";transform: "+transform+";transition: "+transition+";";
+}
+
+module.exports = {
+    wrapperStyle: wrapperStyle
+};

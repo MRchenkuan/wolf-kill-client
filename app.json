@@ -1,8 +1,19 @@
 {
     "pages": [
+        "hanzo_pages/home/index",
+        "hanzo_pages/demo/index",
+        "hanzo_pages/button/index",
+        "hanzo_pages/cell/index",
+        "hanzo_pages/layout/index",
+        "hanzo_pages/popup/index",
+        "hanzo_pages/settlement-bar/index",
+        "hanzo_pages/icons/index",
+        "hanzo_pages/switch-demo/index",
         "pages/create/index",
         "pages/ready/index",
-        "pages/authorize/index"
+        "pages/authorize/index",
+        "pages/tools/index",
+        "pages/index/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

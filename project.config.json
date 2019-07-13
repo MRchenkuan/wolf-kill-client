@@ -13,9 +13,9 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.1",
-	"appid": "wx3d9626f1d689f268",
-	"projectname": "werewolf-kill",
+	"libVersion": "2.7.2",
+	"appid": "wx5ab6dba5437ff013",
+	"projectname": "bibiking",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -40,27 +40,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
-					"name": "进入房间",
+					"name": "进入预定房间",
 					"pathName": "pages/ready/index",
 					"query": "tableId=ckadol",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "授权页面",
-					"pathName": "pages/authorize/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "进入房主",
-					"pathName": "pages/ready/index",
-					"query": "tableId=oMqLq0CB_V3gHSfeSWlciClQ-gJg",
+					"name": "创建房间",
+					"pathName": "pages/create/index",
 					"scene": null
 				}
 			]

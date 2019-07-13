@@ -1,0 +1,8 @@
+.page-home,page{
+    background: #f2f2f2;
+    height: 100%;
+}
+
+.list-item{
+    margin: 10px 0;
+}

@@ -1,0 +1,33 @@
+/* hanzo_components/swipe-cell/swipe-cell-row/index.wxss */
+/**swipe cell row**/
+.swipe-cell-row {
+  width: 100%;
+}
+.swipe-cell-left,
+.swipe-cell-right {
+  display: inline-block;
+  width: 130rpx;
+  font-size: 32rpx;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+  background-color: #e20013;
+  position: absolute;
+  top: 0;
+}
+.swipe-cell-left {
+  left: 0;
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+}
+.swipe-cell-right {
+  right: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+.swipe-cell-text {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}

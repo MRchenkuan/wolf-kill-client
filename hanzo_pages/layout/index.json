@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "Layout 栅格布局",
+        "navigationStyle": "default",
+        "navigationBarTextStyle": "black",
+        
+  "usingComponents": {
+    "h-panel": "/hanzo_components/panel/index",
+    "h-row": "/hanzo_components/layout/row/index",
+    "h-col": "/hanzo_components/layout/col/index"
+  }
+}

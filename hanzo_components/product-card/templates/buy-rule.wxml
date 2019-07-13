@@ -1,0 +1,27 @@
+<template name="buy-rule">
+    <view class="buy-rule row {{ (type==='FRESH_HOUSE' || type==='FRESH_ENTRY') ?'type-fresh-house':''}}">
+        <view class="row">
+            <view class="cpbr-col-lf">
+                <text class="pretime yellow" wx:if="{{preSaleDate}}">预售时间：{{ preSaleDate }}</text>
+            </view>
+            <view class="cpbr-col-rg">
+                <view class="salenum">
+                    <view wx:if="{{saled > 0}}">已售<text class="red">{{saled}}</text>份</view>
+                    <view wx:if="{{totle > 0}}"><text wx:if="{{saled > 0}}" class="cut">/</text>限量{{totle}}份</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="row">
+            <view class="cpbr-col-lf">
+                <view class="thtime yellow" wx:if="{{pickUpDate}}">提货时间：{{ pickUpDate }}</view>
+            </view>
+            <view class="cpbr-col-rg">
+                <view class="sale-data yellow">
+                    <view wx:if="{{saledTotle > 0 || saledTotle.length > 1}}">累计销量{{saledTotle}}份</view>
+                    <view wx:if="{{limit > 0}}"><text wx:if="{{saledTotle > 0 || saledTotle.length > 1}}" class="cut">/</text>每人限购{{limit}}份</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

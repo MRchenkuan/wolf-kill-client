@@ -17,7 +17,6 @@ Page({
     ...openidBehavior.member,
     ...authorizeBehavior.member,
     create(){
-        
         // 获取openId
         getOpenId().then(userId=>{
             // 创建游戏

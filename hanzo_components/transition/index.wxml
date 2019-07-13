@@ -1,0 +1,8 @@
+<view
+  wx:if="{{ inited }}"
+  class="hanzo-transition {{ classes }} {{customClass}} extend-class"
+  style="-webkit-transition-duration:{{ currentDuration }}ms; transition-duration:{{ currentDuration }}ms; {{ display ? '' : 'display: none;' }} {{ customStyle }}"
+  bind:transitionend="onTransitionEnd"
+>
+  <slot />
+</view>

@@ -1,0 +1,11 @@
+<wxs src="./popup.wxs" module="tools" />
+<overlay show="{{mask && show}}" zIndex="{{zIndex-1}}" mask bind:click="onOverlayClick"/>
+<!--extend-class="popup-{{position}}" 需要1.9.90版本上支持-->
+<transition
+        show="{{show}}"
+        name="{{transitionName}}"
+        duration="300"
+        custom-style="z-index: {{ zIndex }}; position:fixed;{{tools.getPosCss(position)}}"
+>
+    <slot />
+</transition>

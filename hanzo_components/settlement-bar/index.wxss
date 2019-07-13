@@ -1,0 +1,82 @@
+.hanzo-settlement-bar {
+  width: 100%;
+  height: 98rpx;
+  /* border: 1rpx solid #ccc; */
+  position: relative;
+}
+.hanzo-settlement-bar .left {
+  padding: 32rpx 0 10rpx 28rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  vertical-align: top;
+  font-size: 26rpx;
+  clear: both;
+  color: #999999;
+}
+.left .checked-radio {
+  font-size: 26rpx;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 24rpx;
+  text-align: center;
+  border: 1rpx solid #ccc;
+  border-radius: 100%;
+  float: left;
+  margin-right: 10rpx;
+}
+.left .checked-radio.checked {
+  border: 1rpx solid #e50011;
+  background: #e50011;
+  color: #fff;
+}
+.left .checked-radio.disabled {
+  border: 1rpx solid #f2f2f2;
+}
+.sumMoney {
+  line-height: 62rpx;
+  font-weight: bold;
+  right: 247rpx;
+  top: 20rpx;
+  color: #EF0A0A;
+  font-size: 44rpx;
+  position: absolute;
+}
+.sumMoney em:nth-child(1) {
+  font-style: normal;
+  font-size: 32rpx;
+  color: #404040;
+  font-weight: normal;
+  position: absolute;
+  left: -72rpx;
+  top: -1rpx;
+}
+.right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 98rpx;
+  line-height: 98rpx;
+}
+.right .balance {
+  background: #E70012;
+  text-align: center;
+  color: #FFF;
+  font-size: 30rpx;
+  width: 223rpx;
+}
+.right .delete {
+  width: 227rpx;
+  border: 1rpx solid #E70012;
+  text-align: center;
+  line-height: 78rpx;
+  color: #E60012;
+  font-size: 32rpx;
+  font-weight: 500;
+  height: 80rpx;
+  margin-top: 8rpx;
+  margin-right: 8rpx;
+  border-radius: 40rpx;
+}
+.right .not-select {
+  background: #C6C6C6;
+}

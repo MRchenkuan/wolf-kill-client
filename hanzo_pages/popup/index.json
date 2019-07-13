@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "hanzo-cart-card 演示",
+  "backgroundTextStyle":"light",
+  "navigationBarBackgroundColor": "#016EE9",
+        "navigationStyle": "default",
+        
+  "navigationBarTextStyle":"black",
+  "usingComponents": {
+    "hanzo-popup": "/hanzo_components/popup/index"
+  }
+}

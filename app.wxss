@@ -6,3 +6,8 @@ page{
     overflow: hidden;
     padding-top: 88rpx;
 }
+
+
+.hanzo-page{
+    color: grey;
+}

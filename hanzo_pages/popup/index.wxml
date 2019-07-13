@@ -1,0 +1,10 @@
+<view class="page popup-page hanzo-page">
+
+    <button bindtap="onPopupShow">弹窗层</button>
+
+    <hanzo-popup show="{{showPopup}}" position="bottom" transitionName="slide-up" bind:mask-click="onMaskClick">
+        <view class="my-popup-text">
+            <text>hello world！{{showPopup}}</text>
+        </view>
+    </hanzo-popup>
+</view>

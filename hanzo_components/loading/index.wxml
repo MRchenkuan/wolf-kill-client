@@ -1,0 +1,16 @@
+<view
+  class="hanzo-loading custom-class"
+  style="width: {{ size }}; height: {{ size }}"
+>
+  <view
+    class="hanzo-loading__spinner hanzo-loading__spinner--{{ type }}"
+    style="color: {{ color }};"
+  >
+    <view
+      wx:if="{{ type === 'spinner' }}"
+      wx:for="item in 12"
+      wx:key="index"
+      class="hanzo-loading__dot"
+    />
+  </view>
+</view>

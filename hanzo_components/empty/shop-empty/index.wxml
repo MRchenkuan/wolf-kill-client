@@ -1,0 +1,7 @@
+<!--hanzo_components/shop-empty/index.wxml-->
+<empty img="./shop-empty/static/shop.png">
+	<view>
+		<view class="hanzo-shop-empty-desc">{{title}}</view>
+		<button class="hanzo-shop-empty-btn" bindtap="ontap">{{btnText}}</button>
+	</view>
+</empty>

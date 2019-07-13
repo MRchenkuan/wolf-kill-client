@@ -35,6 +35,9 @@ Component({
     methods: {
         onTap(){
             this.triggerEvent('click', this.data.player)
+        },
+        onShare(){
+            this.triggerEvent('share', this.data.player)
         }
     }
 })

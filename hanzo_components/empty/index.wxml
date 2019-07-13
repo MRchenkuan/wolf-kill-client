@@ -1,0 +1,12 @@
+<!--hanzo_components/empty/index.wxml-->
+<view class="hanzo-empty">
+	<view class="hanzo-empty-image" wx:if="{{ (img && !type) }}">
+		<image src="{{img}}" mode="aspectFit" class="image"></image>
+	</view>
+	<view wx:if="{{(!img && type)}}" class="hanzo-empty-icon">
+		<icon  type="{{type}}" size="250rpx" color="#dcd7d7"></icon>
+	</view>
+	<view class="hanzo-empty-slot">
+		<slot></slot>
+	</view>
+</view>
