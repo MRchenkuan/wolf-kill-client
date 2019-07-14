@@ -1,4 +1,42 @@
 /* pages/ready/index.wxss */
+.connecting,.connected{
+    position: fixed;
+    z-index: 9999;
+    top: 80rpx;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 30rpx;
+    padding: 0 10rpx;
+    border-radius: 10rpx;
+    
+}
+.connecting{
+    background: linear-gradient(to bottom right, #ff8069, #e70012);
+    opacity: 1;
+    animation: shade .75s infinite;
+}
+.connected{
+    background: linear-gradient(to bottom right, #8BC34A, #4CAF50);
+}
+
+@keyframes shade {
+  0%{
+    opacity: 0;
+  }
+
+  40%{
+    opacity: 1;
+  }
+
+  60%{
+    opacity: 1;
+  }
+
+  100%{
+    opacity: 0;
+  }
+}
+
 
 .players, .roles {
     display: flex;
@@ -72,6 +110,18 @@ page::before{
     100% {
         background-size: auto 120%
     }
+}
+
+.head-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20rpx;
+}
+.desc-viewer{
+    color: #6e5a34;
+    text-shadow: 1px 1px 1px #fdf1db;
+    font-size: 28rpx;
 }
 
 .container{

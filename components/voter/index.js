@@ -1,4 +1,5 @@
 // components/card/index.js
+import {shake} from '../../utils/index.js'
 Component({
     /**
      * 组件的属性列表
@@ -26,9 +27,9 @@ Component({
                 this.drawTickets();
                 const count = {};
                 Object.keys(v).map(f=>{
-                const t = v[f];
-                if (!(count[t] >= 0)) count[t]=0;
-                count[t]++
+                    const t = v[f];
+                    if (!(count[t] >= 0)) count[t]=0;
+                    count[t]++
                 })
                 this.setData({count});
           }
@@ -53,15 +54,16 @@ Component({
     data: {
         checked: null,
         count:{},
+        tearup: {},
         visible:true,
     },
     attached(){
-        wx.vibrateShort();
+        shake();
         this.ctx = wx.createCanvasContext('voteroutes', this);
         
     },
     dettached(){
-        wx.vibrateShort();
+        shake();
     },
     /**
      * 组件的方法列表
@@ -69,10 +71,20 @@ Component({
     methods: {
         drawTickets(){
             setTimeout(() => {
-                this.ctx.clearRect(0, 0, 9999, 9999)
-                Promise.all(Object.keys(this.data.tickets).map(fr => {
+                this.ctx.clearRect(0, 0, 9999, 9999);
+                const tearup = {};
+                const {tickets} = this.data;
+                const validTickets = Object.keys(tickets).filter(fr=>{
+                    const to = tickets[fr];
+                    if(!to) tearup[fr] = true;
+                    return !!to;
+                });
+                // 弃权玩家
+                this.setData({tearup})
+                // 投票玩家
+                Promise.all(validTickets.map(fr => {
                     return new Promise((resolve, rej) => {
-                        const to = this.data.tickets[fr];
+                        const to = tickets[fr];
                         const query = this.createSelectorQuery();
                         query.select(`#voter-inner-frame`).boundingClientRect();
                         query.select(`#fr_${fr}`).boundingClientRect();
@@ -94,7 +106,7 @@ Component({
                     arrows.map(arrow=>{
                         this.drawRoutes(...arrow);
                     })
-                    wx.vibrateShort();
+                    shake();
                     this.ctx.draw()
                 })
             }, 1000);
@@ -134,26 +146,30 @@ Component({
         },
         onCheck(e){
             const checked = e.currentTarget.dataset.checked;
-            wx.vibrateShort()
+            shake()
             this.setData({checked: checked.userId});
         },
         vote(e){
             if(this.data.checked){
-                wx.vibrateShort()
-            this.triggerEvent('vote', { vid: this.data.vid, to: this.data.checked})
+                shake()
+                this.triggerEvent('vote', { vid: this.data.vid, to: this.data.checked})
             }
+        },
+        tearup(){
+            shake();
+            this.triggerEvent('vote', { vid: this.data.vid, to: null})
         },
         closeVote(){
             this.triggerEvent('close', { vid: this.data.vid });
-            wx.vibrateShort()
+            shake()
         },
         hideVote(){
-            wx.vibrateShort()
+            shake()
             this.setData({ visible: false})
         },
         showVoter(){
             this.setData({ visible: true });
-            wx.vibrateShort()
+            shake()
         }
     }
 })

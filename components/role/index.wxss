@@ -2,7 +2,7 @@
 .role{
     width: 100rpx;
     height: 100rpx;
-    margin: 10rpx;
+    margin: 8rpx;
     box-sizing: border-box;
     border: 2px solid #fff;
     border-radius: 5rpx;

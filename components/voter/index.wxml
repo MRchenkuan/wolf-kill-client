@@ -8,10 +8,11 @@
                     <view 
                         id="fr_{{option.userId}}"
                         class="option"
-                        wx:for="{{options}}" 
+                        wx:for="{{options}}"
                         wx:for-item="option" 
                         wx:key="{{option.userId}}">
                         <player simple player="{{option}}" alive="{{option.alive}}"></player>
+                        <view wx:if="{{tearup[option.userId]}}" class="tearup">放弃</view>
                     </view>
                 </view>
                 <view class='viewmode voter-name'>{{name}}结果</view>
@@ -52,7 +53,10 @@
                 </view>
             </view>
         </scroll-view>
-        <view class="btn btn-info confirm" bindtap="vote">确定</view>
+        <view class="btn-group">
+            <view class="btn btn-info confirm" bindtap="vote">确定</view>
+            <view class="btn btn-warn confirm" bindtap="tearup">弃权</view>
+        </view>
     </view>
 
 </block>

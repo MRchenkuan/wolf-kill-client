@@ -1,0 +1,57 @@
+.text{
+    color: #6e5a34;
+    text-shadow: 1px 1px 1px #fdf1db;
+    font-size: 28rpx;
+    max-height: 60vh;
+}
+.qrcode{
+    width:300rpx;
+    height:300rpx;
+    margin:20rpx auto;
+    display:block;
+    border-radius:100%;
+
+}
+.name{
+    font-size: 26rpx;
+    margin: 10rpx 10rpx 0 0;
+    color: #fff;
+    text-shadow: none;
+    display: inline-block;
+    padding: 0 10rpx;
+    border: 2rpx solid #fff;
+    border-radius: 10rpx;
+    background: linear-gradient(to bottom right, #8BC34A, #4CAF50);
+}
+
+.name.much{
+    background:  linear-gradient(to bottom right, #ff8069, #dd2130);
+}
+
+.name.most{
+    background: linear-gradient(to bottom right, rgb(202, 128, 224), rgb(147, 76, 175));
+}
+.donate{
+    width: 100rpx;
+    height: 100rpx;
+    position: fixed;
+    z-index: 9;
+    border-radius: 100%;
+    overflow: hidden;
+    left: 40rpx;
+    bottom: 80rpx;
+    animation: rotate .5s ease;
+    border: 2rpx solid #fff;
+}
+
+
+@keyframes rotate{
+    0%{
+        z-index: 9;
+        transform: rotateY(0);
+    }
+    0%{
+        z-index: 9;
+        transform: rotateY(360deg);
+    }
+}

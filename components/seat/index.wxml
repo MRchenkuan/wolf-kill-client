@@ -8,9 +8,11 @@
             <view class="die-tag">出局</view>
             <view class="die-cover"></view>
         </block>
+        <view class='sheriff' wx:if="{{sheriff}}">警长</view>
+        <view class='localstamp' wx:if="{{localstamp}}">{{localstamp}}</view>
     </view>
-    <view wx:if="{{simple}}" class='simplename'>{{player.name}}</view>
-    <view wx:if="{{!simple}}" class='name'>{{player.name}}</view>
+    <view wx:if="{{simple || judge}}" class='simplename'>{{player.name}}</view>
+    <view wx:else class='name'>{{player.name}}</view>
 </view>
 
 

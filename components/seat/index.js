@@ -20,6 +20,14 @@ Component({
             type: Boolean,
             default: false,
         },
+        sheriff: {
+            type: Boolean,
+            default: false,
+        },
+        localstamp:{
+            type: String,
+            default: "",
+        }
     },
 
     /**

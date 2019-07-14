@@ -31,12 +31,17 @@ Component({
      */
     data: {
         role: {},
+        visiable: true
     },
 
     /**
      * 组件的方法列表
      */
     methods: {
-
+        showTable(){
+            this.setData({
+                visiable: !this.data.visiable,
+            })
+        }
     }
 })

@@ -46,6 +46,14 @@ export default {
     'getTable':{
         url: "/sync",
         method: 'post'
+    },
+    'server': {
+        url: "/server",
+        method: 'post'
+    },
+    'donateList': {
+        url: "/donatelist",
+        method: 'post'
     }
 }
 

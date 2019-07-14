@@ -1,4 +1,4 @@
-<view class='frame'>
+<view class='frame' wx:if="{{visiable}}">
     <game-canvas blur scale/>
     <view class='card {{shake? "shake": ""}}'>
         <image src='./images/{{police?"officer":"back"}}.jpg' class='front {{(!alive) && "dead"}}'></image>
@@ -8,5 +8,6 @@
         <view class='title'>{{role.name}}</view>
         <text class='desc'>{{role.desc}}</text>
     </view>
-    <!-- <view class="btn btn-success btn-show-table" bindtap="showTable">···</view> -->
+    <view class="btn btn-success btn-show-table" catchtap="showTable">桌</view>
 </view>
+<view wx:else class="btn btn-success btn-show-table" catchtap="showTable">牌</view>

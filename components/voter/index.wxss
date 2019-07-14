@@ -9,7 +9,19 @@
     background: rgba(0,0,0,.3);
     z-index: 9;
 }
+.btn-group{
+    margin: 50rpx;
+    display: flex;
+    justify-content: space-around;
+}
 
+.btn-group .btn{
+    width: 45%;
+    height: 50rpx;
+    line-height: 50rpx;
+    margin: 0;
+    padding: 20rpx 0;
+}
 
 .btn {
     padding: 20rpx;
@@ -21,7 +33,16 @@
     text-align: center;
     border-radius: 10rpx;
 }
-
+.tearup{
+    position:absolute;
+    right:0;
+    transform:translate(110%, -50%);
+    top:50%;
+    font-size:30rpx;
+    background:rgba(0,0,0,.5);
+    padding:0 15rpx;
+    border-radius:10rpx;
+}
 .btn-success{
     background: linear-gradient(to bottom right, #8BC34A, #4CAF50);
 }

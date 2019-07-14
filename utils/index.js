@@ -38,6 +38,10 @@ export function debounce(fn, delay, prexec = true) {
 
 }
 
+export const shake = debounce(()=>{
+    wx.vibrateShort()
+}, 500)
+
 /**
  * 商品唯一id
  * @param {*} acId 活动id

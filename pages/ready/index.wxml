@@ -1,18 +1,23 @@
 <game-canvas blur scale animate/>
-
-<view wx:if="{{stage<1 || me.isJudge || me.isViewer}}" class='container'>
-    <text class='title'>座位数</text>
-    <counter
-        wx:if="{{me.isJudge && stage==0}}"
-        value="{{seats}}"
-        max="14"
-        min="{{players.length}}" 
-        bind:plus="onSeatChange" 
-        bind:minus="onSeatChange"
-    />
+<view wx:if="{{!connected}}" class='connecting'>连接中···</view>
+<view wx:else class='connected'>已连接</view>
+<!-- <view wx:if="{{stage<1 || me.isJudge || me.isViewer}}" class='container'> -->
+<view class='container'>
+    <view class='head-bar'>
+        <view wx:if="{{me.isJudge && stage==0}}">
+            <text class='title'>座位</text>
+            <counter
+                value="{{seats}}"
+                max="18"
+                min="{{players.length}}" 
+                bind:plus="onSeatChange" 
+                bind:minus="onSeatChange"
+            />
+        </view>
+        <seat judge player="{{judge}}" alive="{{true}}"/>
+    </view>
     <text class='title'>玩家</text>
     <view class='players'>
-        <seat judge player="{{judge}}" alive="{{true}}"/>
         <seat
             wx:for="{{seats}}" 
             wx:for-item="index" 
@@ -22,6 +27,8 @@
             open="{{me.isJudge || stage===-1}}"
             player="{{players[index]}}"
             alive="{{players[index].alive}}"
+            sheriff="{{players[index].userId === sheriff}}"
+            localstamp="{{localstamp[players[index].userId]}}"
         />
     </view>
     <text class='title'>角色</text>
@@ -32,14 +39,14 @@
             wx:for="{{roleMap}}" 
             wx:for-item="role"
             bind:increase="increaseRole"
-            bind:decrease="decreaseRole"
+            bind:touch="showDesc"
             key="{{role.key}}"
             name="{{role.name}}"
             count="{{role.count}}"
             wx:key="{{role.name}}"
         />
     </view>
-    <view wx:if="{{!me.isJudge}}" class='btn btn-danger' bindtap="goOut">自己开个房</view>
+    <view wx:if="{{!me.isJudge && stage<1}}" class='btn btn-danger' bindtap="goOut">自己开个房</view>
 </view>
 
 <!-- 法官视角 -->
@@ -50,7 +57,7 @@
         <view class='btn btn-success vote' bindtap="createVote">发起投票</view>
         <view class="btn-group">
             <view class='btn btn-danger' bindtap="resetGame">结束该局</view>
-            <view class='btn btn-danger' bindtap="startGame">重新发牌</view>
+            <view class='btn btn-danger' bindtap="startGame">重新洗牌</view>
             <view class='btn btn-warn' bindtap="openAllRoles">公布身份</view>
         </view>
     </block>
@@ -71,6 +78,7 @@
                 <view wx:else catchtap="markPlayer" data-type="alive">标记存活</view>
             </block>
             <block wx:else>
+                <view catchtap="markPlayer" data-type="judge">移交法官</view>
                 <view catchtap="markPlayer" data-type="kickout">踢出</view>
             </block>
         </view>
@@ -97,8 +105,9 @@
                     alive="{{markerTarget.alive}}"
                 />
             </view>
-            <view catchtap="markPlayer" data-type="wolf">狼人</view>
-            <view catchtap="markPlayer" data-type="safe">好人</view>
+            <view catchtap="markLocal" data-type="狼人">标记为狼人</view>
+            <view catchtap="markLocal" data-type="好人">标记为好人</view>
+            <view catchtap="markLocal" data-type="">取消标记</view>
         </view>
     </dialog>
 </block>
@@ -115,7 +124,7 @@
     name="{{voter.name}}"
     tickets="{{voter.tickets}}" 
     is-host="{{me.isJudge}}"
-    view-mode="{{me.isJudge || isVoted || me.isViewer}}"
+    view-mode="{{me.isJudge || isVoted || me.isViewer || !me.alive}}"
     bind:vote="onVote"
     bind:hide="onVoterHide"
     bind:close="onVoterClose"
@@ -130,3 +139,13 @@
        <button class='btn-share' open-type='share'>点击转发</button>
     </view>
 </dialog>
+
+<!-- 身份查看器 -->
+<dialog animation="scale" bind:hide="hideDesc" wx:if="{{descVisiable}}">
+    <view slot="content" class='desc-viewer'>
+       {{roleDesc}}
+    </view>
+</dialog>
+
+<!-- 赞赏 -->
+<appreciate donate-list="{{donateList}}"/>

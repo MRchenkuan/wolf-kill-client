@@ -4,7 +4,7 @@
     position: relative;
     width: 100rpx;
     height: 100rpx;
-    margin: 10rpx;
+    margin: 8rpx;
     border: 2px solid #fff;
     box-sizing: border-box;
     background: grey;
@@ -16,6 +16,7 @@
 }
 .seat.judge{
     box-shadow:0 0 20rpx 6rpx gold;
+    transform: scale(1.2);
 }
 
 .empty {
@@ -46,8 +47,23 @@
     z-index: 0
 }
 
-.die-tag{
-    color: rgb(226, 66, 66);
+.sheriff{
+    color: rgb(70, 70, 235);
+    font-size: 20rpx;
+    font-weight: 900;
+    transform:translate3d(-30%, -20%, 0) rotate(-45deg) ;
+    background:rgba(255, 255, 255, .8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px dashed rgb(70, 70, 235);
+    padding: 0 10rpx;
+    border-radius: 5rpx;
+    z-index: 2;
+}
+
+.localstamp{
+    color: rgb(52, 109, 64);
     font-size: 20rpx;
     font-weight: 900;
     transform:translate3d(30%, -20%, 0) rotate(45deg) ;
@@ -55,6 +71,23 @@
     position: absolute;
     top: 0;
     right: 0;
+    border: 2px dashed rgb(52, 109, 64);
+    padding: 0 10rpx;
+    white-space:nowrap;
+    border-radius: 5rpx;
+    z-index: 2;
+}
+
+.die-tag{
+    color: rgb(226, 66, 66);
+    font-size: 20rpx;
+    font-weight: 900;
+    transform:translate3d(-50%, -50%, 0);
+    background:rgba(255, 255, 255, .8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    white-space:nowrap;
     border: 2px dashed rgb(226, 66, 66);
     padding: 0 10rpx;
     border-radius: 5rpx;

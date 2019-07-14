@@ -6,7 +6,7 @@
     right: 0;
     bottom: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 10;
 }
 
 .card{
@@ -67,6 +67,7 @@
 
 .frame:active>.text{
     transition: 500ms ease 300ms;
+    z-index: 11;
     opacity: 1;
 }
 .frame:active>.card{
@@ -125,8 +126,21 @@
     align-items: center;
     border-radius: 100%;
     bottom: 80rpx;
-    right: 80rpx;
-    position: absolute;
+    right: 40rpx;
+    position: fixed;
+    z-index: 10;
+    border: 1px solid #fff;
+    transition: all .5s ease;
+    animation: rotate .5s;
+}
+
+@keyframes rotate{
+    0%{
+        transform: rotateY(0);
+    }
+    0%{
+        transform: rotateY(360deg);
+    }
 }
 
 .btn-success{

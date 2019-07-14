@@ -1,6 +1,6 @@
 // pages/ready/index.js
 import { commonApi as api, commonSocket as wsCommon } from '../../api/index.js'
-import { showToast, getOpenId} from '../../utils/index.js';
+import { showToast, getOpenId, shake} from '../../utils/index.js';
 const app = getApp();
 import roleMap from '../../components/card/card.js'
 import openidBehavior from '../../behaivor/openid.js';
@@ -14,6 +14,7 @@ Page({
     data: {
         ...openidBehavior.data,
         ...authorizeBehavior.data,
+        connected: false,
         isHost: false,
         seats: 12,
         judge: {}, //法官
@@ -30,6 +31,11 @@ Page({
         voter: {}, // 当前的投票
         markerVisiable: false, // 身份标记器是否可见
         shareVisiable: false, // 分享弹窗
+        descVisiable: false, // 角色介绍弹窗
+        sheriff: "", // 警长
+        roleDesc: "", // 角色介绍
+        localstamp: "", // 本地标记
+        donateList: [], // 捐助列表
     },
     ...openidBehavior.member,
     ...authorizeBehavior.member,
@@ -44,27 +50,32 @@ Page({
 
         // 加入游戏
         const { tableId } = options;
-        this.tableId = tableId;
         this.joinGame(tableId)
     },
     shakeMyCard(){
         this.setData({ myCardShake: false}, ()=>{
             this.setData({ myCardShake: true})
-            wx.vibrateShort()
+            shake()
         })
     },
     /**
      * 加入游戏
      */
     joinGame(tableId){
+        console.log('join game')
+        this.tableId = tableId;
         const { avatarUrl, nickName } = app.globalData.userInfo;
         // 获取openId
         getOpenId().then(userId => {
+            this.userId = userId;
+            api.donateList().then(list=>{
+                this.setData({donateList: list})
+            })
             // 加入游戏
             api.joinGame({ userId, tableId, name: nickName, avt: avatarUrl }).then((table) => {
                 // 同步房间信息
                 this.syncLocal(userId, table);
-                // 监听服务器信息
+                // 连接服务器
                 this.connect({ userId, tableId });
             }).catch(e=>{
                 console.log(e)
@@ -84,6 +95,10 @@ Page({
      * 开始游戏
      */
     startGame(){
+        this.setData({
+            sheriff: "",
+            localstamp: {}
+        })
         const { seats, players, roleMap} = this.data;
         const roleCount = Object.values(roleMap).reduce((a, b) => a + b.count, 0);
         if(seats!==players.length) return showToast('座位未坐满，请调整座位或邀请玩家加入');
@@ -101,6 +116,10 @@ Page({
      * 重置游戏
      */
     resetGame() {
+        this.setData({
+            sheriff: "",
+            localstamp: {}
+        })
         getOpenId().then(userId => {
             api.resetGame({ userId, tableId: this.tableId }).then(table => {
                 // 同步房间信息
@@ -140,7 +159,6 @@ Page({
                 const alives = players.filter(it=>it.alive)
                 // 投票
                 const { tickets, status: voteStatus, id: voteId } = voter;
-                
                 if (this.data.sheriff !== sheriff) this.shakeMyCard();
                 if (this.data.me.alive !== me.alive) this.shakeMyCard();
                 // 同步信息
@@ -163,7 +181,7 @@ Page({
                     // 最近一次投票
                     voter,
                     // 我是否已投票
-                    isVoted: !!tickets[userId],
+                    isVoted: !!tickets[userId] || tickets[userId] === null,
                     // 警长
                     sheriff,
                     // 我的信息
@@ -206,6 +224,9 @@ Page({
                     console.log(e)
                 });
                 break;
+            case "pong": // 心跳
+                this.pong = Date.now();
+                break;
         }
     },
     /**
@@ -237,7 +258,7 @@ Page({
                 _roleMap.Wolf++;
                 _roleMap.Villager = Math.max(1, this.data.seats - othersCount - _roleMap.Wolf);
                 break;
-            case 'Villager': 
+            case 'Villager':
                 _roleMap.Villager++;
                 _roleMap.Wolf = Math.max(1, this.data.seats - othersCount - _roleMap.Villager);
                 break;
@@ -254,6 +275,9 @@ Page({
         }
         if (!(_roleMap.Wolf > 0)) return showToast('狼人数量必须大于1');
         if (!(_roleMap.Villager > 0)) return showToast('村民数量必须大于1');
+        if (Object.values(_roleMap).reduce((a, b) => a + b, 0) > this.data.seats) {
+            return
+        }
         roleMap.map(role=>{
             role.count = _roleMap[role.key] || 0;
         })
@@ -294,52 +318,53 @@ Page({
     connect({ userId, tableId }){
         if(!this.wss){
             // 建立服务器连接
-            this.wss = wsCommon.connect({ userId, tableId });
-            // 监听服务端消息
-            this.wss.onMessage((message) => {
-                const { name, data } = JSON.parse(message.data);
-                this.eventRouter(name, data);
-            });
-            this.wss.onClose(() => {
-                this.wss = null
+            wsCommon.connect({ userId, tableId }).then((task)=>{
+                this.wss = task;
+                // 监听服务端消息
+                this.wss.onMessage((message) => {
+                    const { name, data } = JSON.parse(message.data);
+                    this.eventRouter(name, data);
+                });
+                this.wss.onClose(() => {
+                    this.wss = null
+                })
+                this.wss.onError(()=>{
+                    this.wss = null
+                    wx.closeSocket();
+                })
+                // 开始心跳
+                this.beat();
             })
-            this.wss.onError(()=>{
-                this.wss = null
-                wx.closeSocket();
-            })
-            // 开始心跳
-            this.beat();
         }
     },
     /**
      * 心跳
      */
     beat(){
-        const duration = 10 * 1000;
-        let timer = null;
-        let pong = false;
+        const duration = 1 * 1000;
         const ping = ()=>{
-            pong = false;
-            this.wss.wx.sendSocketMessage({
-                data: "ping",
+            if(this.wss) this.wss.send({
+                data: "ping"
             });
+            clearTimeout(this.beatTimer);
+            // 十秒钟之后检测 pong
+            this.beatTimer = setTimeout(()=>{
+                if (!this.pong) this.pong = Date.now();
+                // debugger
+                if((Date.now() - this.pong) >= duration * 3){
+                    this.setData({
+                        connected: false
+                    })
+                    this.joinGame(this.tableId)
+                } else {
+                    this.setData({
+                        connected: true
+                    })
+                }
+                ping();
+            }, duration)
         }
-
-        this.wss.onMessage((message) => {
-            // 接受心跳，如果收到了，则重置计时器，否则重连
-            if (message === 'pong'){
-                pong = true;
-                clearTimeout(timer);
-                setTimeout(ping, duration);
-            } 
-        });
-        timer = setTimeout(()=>{
-            if(!pong) {
-                this.connect({ userId, tableId: this.tableId })
-            } else {
-                pong = false;
-            }
-        }, duration)
+        ping();
     },
     /**
      * 创建一个投票
@@ -405,6 +430,23 @@ Page({
         })
     },
     /**
+     * 隐藏角色介绍
+     */
+    hideDesc() {
+        this.setData({
+            descVisiable: false,
+        })
+    },
+    /**
+     * 展示角色介绍
+     */
+    showDesc({ detail }){
+        this.setData({
+            descVisiable: true,
+            roleDesc: `【${roleMap[detail].name}】:${roleMap[detail].desc}`
+        })
+    },
+    /**
      * 隐藏标记器
      */
     hideMarker(){
@@ -427,12 +469,23 @@ Page({
         })
     },
     /**
+     * 标记本地玩家
+     */
+    markLocal(e){
+        const type = e.currentTarget.dataset.type;
+        const target = (this.data.markerTarget || {}).userId;
+        this.hideMarker();
+        this.setData({
+            localstamp: { ...this.data.localstamp, [target]: type}
+        })
+    },
+    /**
      * 法官设置座位
      */
     onSeatChange(e){
         const value = e.detail;
         const {seats, players} = this.data;
-        if (seats!=value && (value >= players.length) && (value <= 14)){
+        if (seats!=value && (value >= players.length) && (value <= 18)){
             getOpenId().then(userId => {
                 api.updateTable({
                     key: 'seats',

@@ -34,7 +34,9 @@ Component({
      */
     methods: {
         increase() {
-            if (this.data.readOnly) return;
+            if (this.data.readOnly) {
+                return this.triggerEvent('touch', this.data.key)
+            };
             this.triggerEvent('increase', this.data.key)
         },
         decrease() { 
