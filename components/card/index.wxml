@@ -1,13 +1,15 @@
-<view class='frame' wx:if="{{visiable}}">
-    <game-canvas blur scale/>
-    <view class='card {{shake? "shake": ""}}'>
-        <image src='./images/{{police?"officer":"back"}}.jpg' class='front {{(!alive) && "dead"}}'></image>
-        <image src='./images/{{type}}.jpg' class='back'></image>
-    </view>
-    <view class='text'>
-        <view class='title'>{{role.name}}</view>
-        <text class='desc'>{{role.desc}}</text>
+<block wx:if="{{visiable}}">
+    <view class='frame'>
+        <game-canvas blur scale/>
+        <view class='card {{shake? "shake": ""}}'>
+            <image src='./images/{{police?"officer":"back"}}.jpg' class='front {{(!alive) && "dead"}}'></image>
+            <image src='./images/{{type}}.jpg' class='back'></image>
+        </view>
+        <view class='text'>
+            <view class='title'>{{role.name}}</view>
+            <text class='desc'>{{role.desc}}</text>
+        </view>
     </view>
     <view class="btn btn-success btn-show-table" catchtap="showTable">桌</view>
-</view>
+</block>
 <view wx:else class="btn btn-success btn-show-table" catchtap="showTable">牌</view>

@@ -78,6 +78,7 @@ Page({
                 // 连接服务器
                 this.connect({ userId, tableId });
             }).catch(e=>{
+                clearTimeout(this.beatTimer);
                 console.log(e)
                 showToast("加入游戏失败");
                 //todo 重新加入
