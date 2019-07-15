@@ -50,7 +50,7 @@
         z-index: 9;
         transform: rotateY(0);
     }
-    0%{
+    100%{
         z-index: 9;
         transform: rotateY(360deg);
     }

@@ -1,23 +1,23 @@
 <block wx:if="{{show}}">
-<dialog animation="scale" bind:hide="coin">
-    <scroll-view scroll-y slot="content" class='text'>
-       <view>【说明】</view>
-       <view>赞赏纯属个人自愿行为，玩家是否捐助，游戏内容完全一致。</view>
-       <view>【赞赏作者】</view>
-       <view>· 一次赞赏可以留下一个「微信昵称」作为捐助者身份。</view>
-       <view>· 捐助者留下的「昵称」，会作为捐助身份，在游戏中标识出。</view>
-       <view>· 捐助者的「昵称」会出现在捐助列表中。</view>
-       <view>· 捐助者列表是手动维护，所以会在下一个版本发布时更新。</view>
-       <image bindtap="tap" src='./images/qrcode.jpg' class='qrcode'></image>
-       <view>【捐助列表】</view>
-       <view
-            wx:for="{{donateList}}" 
-            wx:for-item="donate"
-            wx:for-index="index"
-            wx:key="index"
-            class="name {{donate[1]>5&&'much'}} {{donate[1]>=88&&'most'}}">{{donate[0]}} x {{donate[1]}}两</view>
-    </scroll-view>
-</dialog>
-<image catchtap='coin' src='./images/coin.png' class='donate'></image>
+    <dialog animation="scale" bind:hide="coin">
+        <scroll-view scroll-y slot="content" class='text'>
+        <view>【说明】</view>
+        <view>赞赏纯属个人自愿行为，玩家是否捐助，游戏内容完全一致。</view>
+        <view>【赞赏作者】</view>
+        <view>· 一次赞赏可以留下一个「微信昵称」作为捐助者身份。</view>
+        <view>· 捐助者留下的「昵称」，会作为捐助身份，在游戏中标识出。</view>
+        <view>· 捐助者留下的「昵称」和「捐助金额」会出现在捐助列表中。</view>
+        <view>· 捐助者列表是手动维护，所以会在下一个版本发布时更新。</view>
+        <image bindtap="tap" src='./images/qrcode.jpg' class='qrcode'></image>
+        <view>【捐助列表】</view>
+        <view
+                wx:for="{{donateList}}" 
+                wx:for-item="donate"
+                wx:for-index="index"
+                wx:key="index"
+                class="name {{donate[1]>5&&'much'}} {{donate[1]>=88&&'most'}}">{{donate[0]}} x {{donate[1]}}两</view>
+        </scroll-view>
+    </dialog>
+    <image catchtap='coin' src='./images/coin.png' class='donate'></image>
 </block>
 <image wx:else catchtap='coin' src='./images/coin.png' class='donate'></image>

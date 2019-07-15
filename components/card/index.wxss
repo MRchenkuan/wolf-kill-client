@@ -67,7 +67,7 @@
 
 .frame:active>.text{
     transition: 500ms ease 300ms;
-    z-index: 11;
+    z-index: 12;
     opacity: 1;
 }
 .frame:active>.card{
@@ -128,10 +128,11 @@
     bottom: 80rpx;
     right: 40rpx;
     position: fixed;
-    z-index: 10;
+    z-index: 11;
     border: 1px solid #fff;
     transition: all .5s ease;
     animation: rotate .5s;
+    opacity: .8;
 }
 
 @keyframes rotate{
