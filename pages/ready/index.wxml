@@ -100,7 +100,6 @@
             <view class="head">
                 <seat
                     horizontal
-                    open="{{true}}"
                     player="{{markerTarget}}"
                     alive="{{markerTarget.alive}}"
                 />

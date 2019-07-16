@@ -9,7 +9,7 @@ export function getOpenId(){
         // 登录
         wx.login({
             success: res => {
-                api.getOpenId({ code: res.code }).then((data => {
+                api.getOpenId({ code: res.code }, { silence: true }).then((data => {
                     wx.setStorageSync('openid', data);
                     resolve(data);
                 })).catch(e=>{

@@ -13,7 +13,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.2",
+	"libVersion": "2.7.5",
 	"appid": "wx5ab6dba5437ff013",
 	"projectname": "bibiking",
 	"debugOptions": {
