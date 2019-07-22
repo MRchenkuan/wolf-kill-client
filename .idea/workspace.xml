@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cc4a42ce-a789-4697-8e63-f8dd82f7f2ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/appreciate/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/components/appreciate/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/card/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/components/card/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ready/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ready/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/user.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,7 +29,7 @@
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -74,8 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/card/index.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="127" column="18" lean-forward="true" selection-start-line="127" selection-start-column="18" selection-end-line="127" selection-end-column="18" />
+            <state relative-caret-position="396">
+              <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -183,7 +178,7 @@
       <option name="presentableId" value="Default" />
       <updated>1561043864062</updated>
       <workItem from="1561043867067" duration="2989000" />
-      <workItem from="1563191110032" duration="751000" />
+      <workItem from="1563191110032" duration="798000" />
     </task>
     <task id="LOCAL-00001" summary="标记器">
       <created>1561295401199</created>
@@ -206,11 +201,18 @@
       <option name="project" value="LOCAL" />
       <updated>1561368653521</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="边边角角">
+      <created>1563259117053</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1563259117053</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2578000" />
+    <option name="totallyTimeSpent" value="2625000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -298,8 +300,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/card/index.wxss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="127" column="18" lean-forward="true" selection-start-line="127" selection-start-column="18" selection-end-line="127" selection-end-column="18" />
+        <state relative-caret-position="396">
+          <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
         </state>
       </provider>
     </entry>

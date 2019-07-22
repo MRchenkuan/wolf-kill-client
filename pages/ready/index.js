@@ -320,6 +320,9 @@ Page({
         if(!this.wss){
             // 建立服务器连接
             wsCommon.connect({ userId, tableId }).then((task)=>{
+                this.setData({
+                    connected: true
+                })
                 this.wss = task;
                 // 监听服务端消息
                 this.wss.onMessage((message) => {
@@ -342,26 +345,23 @@ Page({
      * 心跳
      */
     beat(){
-        const duration = 1 * 1000;
+        const duration = 5 * 1000;
         const ping = ()=>{
             if(this.wss) this.wss.send({
                 data: "ping"
             });
+            this.ping = Date.now();
             clearTimeout(this.beatTimer);
             // 十秒钟之后检测 pong
             this.beatTimer = setTimeout(()=>{
-                if (!this.pong) this.pong = Date.now();
+                if (!this.pong) this.pong = 0;
                 // debugger
-                if((Date.now() - this.pong) >= duration * 3){
-                    this.setData({
-                        connected: false
-                    })
+                this.setData({
+                    connected: (this.ping - this.pong) < 5000
+                })
+                if((this.ping - this.pong) >= 5000){
                     this.joinGame(this.tableId)
-                } else {
-                    this.setData({
-                        connected: true
-                    })
-                }
+                } 
                 ping();
             }, duration)
         }

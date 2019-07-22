@@ -91,20 +91,27 @@ Component({
                         query.select(`#to_${to}`).boundingClientRect();
 
                         query.exec(([frame, fr, to]) => {
-                            const start = [
-                                fr.left - frame.left + fr.width + 5,
-                                fr.top - frame.top + fr.height / 2
-                            ];
-                            const end = [
-                                to.left - frame.left - 5,
-                                to.top - frame.top + to.height / 2
-                            ];
-                            resolve([...start, ...end])
+                            if(frame && fr && to){
+                                const start = [
+                                    fr.left - frame.left + fr.width + 5,
+                                    fr.top - frame.top + fr.height / 2
+                                ];
+                                const end = [
+                                    to.left - frame.left - 5,
+                                    to.top - frame.top + to.height / 2
+                                ];
+                                resolve([...start, ...end])
+                            } else {
+                                resolve([]);
+                            }
+                            
                         })
                     })
                 })).then(arrows=>{
                     arrows.map(arrow=>{
-                        this.drawRoutes(...arrow);
+                        if(arrow.length){
+                            this.drawRoutes(...arrow);
+                        }
                     })
                     shake();
                     this.ctx.draw()

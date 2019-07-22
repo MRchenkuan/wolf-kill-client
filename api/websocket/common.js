@@ -19,6 +19,7 @@ export default function (urlPrefix) {
                 task.onOpen(()=>{
                     resolve(task)
                 })
+                
             })
         }
     }

@@ -9,7 +9,7 @@
             <view class='title'>{{role.name}}</view>
             <text class='desc'>{{role.desc}}</text>
         </view>
+        <view class="btn btn-success btn-show-table in" catchtap="showTable">桌</view>
     </view>
-    <view class="btn btn-success btn-show-table" catchtap="showTable">桌</view>
 </block>
 <view wx:else class="btn btn-success btn-show-table" catchtap="showTable">牌</view>

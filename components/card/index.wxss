@@ -132,7 +132,10 @@
     border: 1px solid #fff;
     transition: all .5s ease;
     animation: rotate .5s;
-    opacity: .8;
+}
+
+.btn.btn-show-table.in{
+    z-index: 9;
 }
 
 @keyframes rotate{
