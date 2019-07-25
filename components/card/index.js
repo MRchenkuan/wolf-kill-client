@@ -23,6 +23,10 @@ Component({
         alive:{
             type: Boolean,
             default: false,
+        },
+        adsbtn:{
+            type: String,
+            default: ""
         }
     },
 
@@ -31,7 +35,8 @@ Component({
      */
     data: {
         role: {},
-        visiable: true
+        visiable: true,
+        adsVisiable: false,
     },
 
     /**
@@ -42,6 +47,9 @@ Component({
             this.setData({
                 visiable: !this.data.visiable,
             })
+        },
+        clickads(){
+            this.triggerEvent("adsclick")
         }
     }
 })

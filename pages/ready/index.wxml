@@ -93,6 +93,8 @@
         type="{{me.role.type}}"
         alive="{{me.alive}}"
         police="{{sheriff===me.userId}}"
+        adsbtn="{{ads.entry}}"
+        bind:adsclick="showAds"
     />
     <!-- 标记器 -->
     <dialog animation="scale" bind:hide="hideMarker" wx:if="{{markerVisiable}}">
@@ -148,3 +150,10 @@
 
 <!-- 赞赏 -->
 <appreciate donate-list="{{donateList}}"/>
+
+<!-- 广告 -->
+<dialog animation="scale" bind:hide="hideAds" wx:if="{{adsVisiable && ads.desc}}">
+    <scroll-view slot="content" style='max-height: 50vh' scroll-y>
+        <image bindtap='previewAds' mode="widthFix" src='{{ads.desc}}' style='width: 100%;'></image>
+    </scroll-view>
+</dialog>

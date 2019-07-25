@@ -36,6 +36,11 @@ Page({
         roleDesc: "", // 角色介绍
         localstamp: "", // 本地标记
         donateList: [], // 捐助列表
+        ads: {
+            entry: "",
+            desc: ""
+        },
+        adsVisiable: false, // 广告弹框
     },
     ...openidBehavior.member,
     ...authorizeBehavior.member,
@@ -68,8 +73,11 @@ Page({
         // 获取openId
         getOpenId().then(userId => {
             this.userId = userId;
-            api.donateList().then(list=>{
-                this.setData({donateList: list})
+            api.bizinfo().then(list=>{
+                this.setData({ 
+                    donateList: list.donate,
+                    ads : list.ads,
+                })
             })
             // 加入游戏
             api.joinGame({ userId, tableId, name: nickName, avt: avatarUrl }).then((table) => {
@@ -431,6 +439,22 @@ Page({
         })
     },
     /**
+     * 隐藏广告图
+     */
+    hideAds() {
+        this.setData({
+            adsVisiable: false,
+        })
+    },
+    /**
+     * 展示广告图
+     */
+    showAds() {
+        this.setData({
+            adsVisiable: true,
+        })
+    },
+    /**
      * 隐藏角色介绍
      */
     hideDesc() {
@@ -516,5 +540,14 @@ Page({
             title: `「${app.globalData.userInfo.nickName}」邀请你加入他的的游戏房间`,
             path:`/pages/ready/index?tableId=${this.tableId}`
         }
-    }
+    },
+    /**
+     * 预览广告
+     */
+    previewAds() {
+        if(this.data.ads.desc)
+        wx.previewImage({
+            urls: [this.data.ads.desc],
+        });
+    },
 })

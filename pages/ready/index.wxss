@@ -124,6 +124,12 @@ page::before{
     font-size: 28rpx;
 }
 
+.desc-ads{
+    color: #6e5a34;
+    text-shadow: 1px 1px 1px #fdf1db;
+    font-size: 28rpx;
+}
+
 .container{
     padding: 5vw 20rpx 0;
 }

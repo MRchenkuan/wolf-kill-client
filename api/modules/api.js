@@ -51,8 +51,8 @@ export default {
         url: "/server",
         method: 'post'
     },
-    'donateList': {
-        url: "/donatelist",
+    'bizinfo': {
+        url: "/bizinfo",
         method: 'post'
     }
 }
