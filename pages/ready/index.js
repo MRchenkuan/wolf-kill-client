@@ -153,7 +153,7 @@ Page({
     syncLocal(userId, table){
         return new Promise((resolve, reject)=>{
             try{
-                const { ownerId, player, roleMap, status, seats, roles, voter, sheriff } = table;
+              const { ownerId, player, roleMap, status, seats, roles, voter, sheriff } = table;
                 // 座位
                 this.seats = seats;
                 // 我是谁
@@ -161,11 +161,14 @@ Page({
                 // 法官
                 const judge = player.find(it => it.isJudge) || {}
                 // 玩家
-                const players = player.filter(it => it.isPlayer);
+                const players = player.filter(it => it.isPlayer).sort((a,b)=>{
+                  // debugger
+                  return ~~a.seatNumber - ~~b.seatNumber
+                });
                 // 观众
                 const viewers = player.filter(it => it.isViewer);
                 // 活人
-                const alives = players.filter(it=>it.alive)
+                const alives = players.filter(it=>it.alive);
                 // 投票
                 const { tickets, status: voteStatus, id: voteId } = voter;
                 if (this.data.sheriff !== sheriff) this.shakeMyCard();
@@ -481,7 +484,7 @@ Page({
         })
     },
     /**
-     * 法官标记警长paplayerspsfdssf
+     * 法官标记警长
      */
     markPlayer(e) {
         const type = e.currentTarget.dataset.type;
@@ -527,7 +530,30 @@ Page({
      * 显示时触发
      */
     onShow(){
-        this.joinGame(this.tableId)
+        this.joinGame(this.tableId);
+        // 优化屏幕状态
+        this.optimizeScreen();
+    },
+    optimizeScreen(){
+      // 保持常亮
+      wx.setKeepScreenOn({
+        keepScreenOn: true
+      })
+      // // 保持亮度
+      // wx.getScreenBrightness({
+      //   success(res){
+      //     // debugger
+      //     wx.setScreenBrightness({
+      //       value: Math.max(res.value, 0.8)
+      //     })
+      //   },
+      //   fail(){
+      //     wx.setScreenBrightness({
+      //       value: 0.8
+      //     })
+      //   }
+      // })
+      
     },
     /**
      * 用户点击右上角分享
@@ -550,4 +576,55 @@ Page({
             urls: [this.data.ads.desc],
         });
     },
+  /**
+   * 打开座次标记器
+   */
+  showSeatManager(){
+    this.setData({
+      seatMngerVisiable: true,
+    })
+  },
+  hideSeatMnger(){
+    this.setData({
+      seatMngerVisiable: false,
+    })
+  },
+  /**
+   * 标记自己的座位号
+   */
+  markMySeatNumber(e){
+    const num = e.currentTarget.dataset.num;
+    if (num){
+      getOpenId().then(userId => {
+        wx.vibrateShort()
+        api.markSelf({
+          type: "seatnumber",
+          value: num,
+          userId,
+          tableId: this.tableId
+        }).then((table) => {
+          this.syncLocal(userId, table)
+        });
+      })
+    }
+  },
+  /**
+   * 标记自己的名字
+   */
+  markMyDisplayName(e){
+    const name = e.detail.value;
+    if (name) {
+      getOpenId().then(userId => {
+        wx.vibrateShort()
+        api.markSelf({
+          type: "displayname",
+          value: name,
+          userId,
+          tableId: this.tableId
+        }).then((table) => {
+          this.syncLocal(userId, table)
+        });
+      })
+    }  
+  },
 })

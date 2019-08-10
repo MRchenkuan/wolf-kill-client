@@ -163,3 +163,40 @@ page::before{
     margin: 40rpx 20rpx;
     background: linear-gradient(to bottom right, #8BC34A, #4CAF50);
 }
+
+.seat-number{
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  background: rgba(0, 0, 0, .5);
+  font-size: 36rpx;
+  text-align: center;
+  float: left;
+  margin: 20rpx;
+}
+.seat-number.active{
+  background: rgba(255, 255, 255, .5);
+  color: rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+
+.seat-man-title{
+  font-size: 36rpx;
+  color: #6e5a34;
+  margin-top: 20rpx;
+}
+
+.name-input{
+  font-size: 40rpx;
+  color: #6e5a34;
+  font-weight: 900;
+  text-align: center;
+  border-bottom: 2rpx solid #6e5a34;
+  padding: 10rpx;
+}
+.name-input-placeholder{
+  font-size: 26rpx;
+  color: #6e5a34;
+  font-weight: 900;
+}

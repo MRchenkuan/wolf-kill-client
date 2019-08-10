@@ -4,6 +4,7 @@
         <view class='card {{shake? "shake": ""}}'>
             <view class='front {{(!alive) && "dead"}}'>
                 <image class='front-cover' src='./images/{{police?"officer":"back"}}.jpg' ></image>
+                <view wx:if="seat" class="seat-number">{{seat}}</view>
                 <image catchtap="clickads" wx:if="{{adsbtn}}" src="{{adsbtn}}" class='ads-btn'></image>
             </view>
             <image src='./images/{{type}}.jpg' class='back'></image>

@@ -27,6 +27,7 @@
 }
 
 .card>.front, .card>.back{
+    overflow: hidden;
     left: 0;
     position: absolute;
     width: 100%;
@@ -175,4 +176,24 @@
 }
 .dead{
     filter: grayscale();
+}
+
+.seat-number{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 100%;
+  width: 80vw;
+  height: 80vw;
+  background: rgba(26, 26, 26, 0.603);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80vw;
+  overflow: hidden;
+  color: rgb(255, 255, 255);
+  font-family: 'times new roman';
+  text-shadow: 0 0 20rpx #000;
 }

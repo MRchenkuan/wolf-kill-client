@@ -1,5 +1,9 @@
 import roleMap from './card.js';
 // components/card/index.js
+const romeNumber = [, 
+  'I', 'II', 'III', 'IV', 'V', 'VI','VII', 'VIII', 'IX', 'X',
+  'XI', "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII"
+]
 Component({
     /**
      * 组件的属性列表
@@ -27,6 +31,10 @@ Component({
         adsbtn:{
             type: String,
             default: ""
+        },
+        seat:{
+          type: String,
+          default: ""
         }
     },
 
@@ -37,6 +45,7 @@ Component({
         role: {},
         visiable: true,
         adsVisiable: false,
+        romeNumber
     },
 
     /**

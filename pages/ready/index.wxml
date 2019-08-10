@@ -14,7 +14,7 @@
                 bind:minus="onSeatChange"
             />
         </view>
-        <seat judge player="{{judge}}" alive="{{true}}"/>
+        <seat judge player="{{judge}}" alive="{{true}}" bind:click="{{me.isJudge && 'showSeatManager'}}"/>
     </view>
     <text class='title'>玩家</text>
     <view class='players'>
@@ -22,7 +22,7 @@
             wx:for="{{seats}}" 
             wx:for-item="index" 
             wx:key="{{index}}"
-            bind:click="showMarker"
+            bind:click="{{players[index].userId === me.userId ? 'showSeatManager':'showMarker'}}"
             bind:share="showShare"
             open="{{me.isJudge || stage===-1}}"
             player="{{players[index]}}"
@@ -46,7 +46,7 @@
             wx:key="{{role.name}}"
         />
     </view>
-    <view wx:if="{{!me.isJudge && stage<1}}" class='btn btn-danger' bindtap="goOut">自己开个房</view>
+    <view wx:if="{{!me.isJudge && stage<1}}" class='btn btn-danger' bindtap="goOut">退出房间</view>
 </view>
 
 <!-- 法官视角 -->
@@ -95,6 +95,7 @@
         police="{{sheriff===me.userId}}"
         adsbtn="{{ads.entry}}"
         bind:adsclick="showAds"
+        seat="{{me.seatNumber}}"
     />
     <!-- 标记器 -->
     <dialog animation="scale" bind:hide="hideMarker" wx:if="{{markerVisiable}}">
@@ -155,5 +156,30 @@
 <dialog animation="scale" bind:hide="hideAds" wx:if="{{adsVisiable && ads.desc}}">
     <scroll-view slot="content" style='max-height: 50vh' scroll-y>
         <image bindtap='previewAds' mode="widthFix" src='{{ads.desc}}' style='width: 100%;'></image>
+    </scroll-view>
+</dialog>
+
+<!-- 座次标记器 -->
+<dialog animation="scale" bind:hide="hideSeatMnger" wx:if="{{seatMngerVisiable}}">
+    <scroll-view slot="content" style='max-height: 50vh' scroll-y>
+        <view class="seat-man-title">填写称呼</view>
+        <input 
+          placeholder-class="name-input-placeholder" 
+          class="name-input" 
+          placeholder="人不能没有称呼"
+          maxlength="10"
+          value="{{me.displayName || me.name}}"
+          bindblur="markMyDisplayName"
+        />
+        <block wx:if="{{!me.isJudge}}">
+          <view class="seat-man-title">调整座次</view>
+          <view 
+            class="seat-number {{(index+1)===me.seatNumber && 'active'}}" 
+            wx:for="{{seats}}" 
+            wx:for-item="index" 
+            wx:key="index" 
+            bindtap="markMySeatNumber" 
+            data-num="{{index+1}}">{{index+1}}</view>
+        </block>
     </scroll-view>
 </dialog>

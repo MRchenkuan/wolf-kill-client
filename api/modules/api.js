@@ -54,6 +54,10 @@ export default {
     'bizinfo': {
         url: "/bizinfo",
         method: 'post'
+    },
+    "markSelf":{
+      url: "/markself",
+      method: "post"
     }
 }
 

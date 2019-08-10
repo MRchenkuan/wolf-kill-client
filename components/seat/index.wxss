@@ -77,6 +77,10 @@
     border-radius: 5rpx;
     z-index: 2;
 }
+.localstamp.danger{
+  color: rgb(226, 66, 66);
+  border: 2px dashed rgb(226, 66, 66);
+}
 
 .die-tag{
     color: rgb(226, 66, 66);
@@ -114,6 +118,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center;
+    margin-bottom: 10rpx;
 }
 
 .simplename{
@@ -137,4 +142,21 @@
 .tool{
     position: absolute;
     right: 0;top: 0;
+}
+.seat-number{
+  position: absolute;
+  left: 50%;
+  top: 0;
+  padding: 2rpx;
+  background: rgba(0,0,0,.8);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 28rpx;
+  border: 1px solid #fff;
+  font-weight: 900;
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  border-radius: 30rpx;
+  z-index: 3;
 }
