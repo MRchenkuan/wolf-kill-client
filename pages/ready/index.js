@@ -55,7 +55,7 @@ Page({
 
         // 加入游戏
         const { tableId } = options;
-        this.joinGame(tableId)
+        this.joinGame(tableId);
     },
     shakeMyCard(){
         this.setData({ myCardShake: false}, ()=>{
@@ -69,7 +69,7 @@ Page({
     joinGame(tableId){
         console.log('join game')
         this.tableId = tableId;
-        const { avatarUrl, nickName } = app.globalData.userInfo;
+        const { avatarUrl, nickName } = app.globalData.userInfo||{};
         // 获取openId
         getOpenId().then(userId => {
             this.userId = userId;
@@ -80,19 +80,23 @@ Page({
                 })
             })
             // 加入游戏
-            api.joinGame({ userId, tableId, name: nickName, avt: avatarUrl }).then((table) => {
+            api.joinGame({ userId, tableId, name: nickName, avt: avatarUrl}, {}, {silence: true}).then((table) => {
                 // 同步房间信息
                 this.syncLocal(userId, table);
                 // 连接服务器
                 this.connect({ userId, tableId });
+                // 第一次心跳
+                this.pong = Date.now();
             }).catch(e=>{
                 clearTimeout(this.beatTimer);
-                console.log(e)
-                showToast("加入游戏失败");
+                if(app.globalData.isConnected) showToast("加入游戏失败, 尝试重新加入");
                 //todo 重新加入
+                setTimeout(()=>{
+                    this.joinGame(tableId);
+                }, 1000)
             });
         }).catch(e => {
-            showToast('用户id 获取失败')
+            showToast('用户 id 获取失败')
         })
     },
     goOut(){
@@ -344,8 +348,8 @@ Page({
                     this.wss = null
                 })
                 this.wss.onError(()=>{
-                    this.wss = null
                     wx.closeSocket();
+                    this.wss = null
                 })
                 // 开始心跳
                 this.beat();
@@ -356,23 +360,31 @@ Page({
      * 心跳
      */
     beat(){
-        const duration = 5 * 1000;
+        const duration = 1 * 1500;
         const ping = ()=>{
             if(this.wss) this.wss.send({
-                data: "ping"
+                data: "ping",
+                fail(e){
+                    console.log(e)
+                }
             });
             this.ping = Date.now();
             clearTimeout(this.beatTimer);
             // 十秒钟之后检测 pong
             this.beatTimer = setTimeout(()=>{
-                if (!this.pong) this.pong = 0;
-                // debugger
-                this.setData({
-                    connected: (this.ping - this.pong) < 5000
-                })
-                if((this.ping - this.pong) >= 5000){
-                    this.joinGame(this.tableId)
-                } 
+                try{
+                    if (!this.pong) this.pong = 0;
+                    const delay = Math.abs((this.pong - this.ping));
+                    console.log(this.pong, delay);
+                    const connected = delay < duration * 4;
+                    // debugger
+                    this.setData({ connected });
+                    if(!connected){
+                        this.joinGame(this.tableId)
+                    }
+                } catch (e){
+                    console.log(e)
+                }
                 ping();
             }, duration)
         }
@@ -539,20 +551,20 @@ Page({
       wx.setKeepScreenOn({
         keepScreenOn: true
       })
-      // // 保持亮度
-      // wx.getScreenBrightness({
-      //   success(res){
-      //     // debugger
-      //     wx.setScreenBrightness({
-      //       value: Math.max(res.value, 0.8)
-      //     })
-      //   },
-      //   fail(){
-      //     wx.setScreenBrightness({
-      //       value: 0.8
-      //     })
-      //   }
-      // })
+      // 保持亮度
+    //   wx.getScreenBrightness({
+    //     success(res){
+    //       // debugger
+    //       wx.setScreenBrightness({
+    //         value: Math.max(res.value, 0.8)
+    //       })
+    //     },
+    //     fail(){
+    //       wx.setScreenBrightness({
+    //         value: 0.8
+    //       })
+    //     }
+    //   })
       
     },
     /**
